@@ -61,7 +61,7 @@ programs.git = {
 };
 
 home.sessionPath = [
-  "${config.home.homeDirectory}/dotfiles/shell/env"
+  "${config.home.homeDirectory}/dotfiles/shell/path"
 ];
 
 programs.bash = {

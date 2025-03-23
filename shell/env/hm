@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-HOME_MANAGER_DIR="${HOME}/dotfiles/home-manager"
+HOME_MANAGER_DIR="${HOME}/dotfiles"
 
 case "${1:-}" in
 	edit | e)

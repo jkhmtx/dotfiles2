@@ -36,7 +36,7 @@ programs.neovim = {
 programs.kitty = {
   enable = true;
 
-  shellIntegration.enableBashIntegration = true;
+  shellIntegration.enableZshIntegration = true;
 
   themeFile = "Catppuccin-Macchiato";
 };
@@ -56,19 +56,20 @@ programs.git = {
 programs.oh-my-posh = {
   enable = true;
 
-  # Managed in programs.bash.initExtra
-  enableBashIntegration = false;
+  # Managed in programs.zsh.initExtra
+  enableZshIntegration = false;
 };
 
 home.sessionPath = [
   "${config.home.homeDirectory}/dotfiles/shell/path"
 ];
 
-programs.bash = {
+programs.zsh = {
   enable = true;
 
   initExtra = ''
-  eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init bash --config ${./shell/oh-my-posh/conf.toml})"
+  # Prompt theming
+  eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
   '';
 };
 }

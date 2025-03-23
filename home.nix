@@ -46,6 +46,8 @@ programs.neovim = {
 
 programs.kitty = {
   enable = true;
+
+  shellIntegration.enableBashIntegration = true;
 };
 
 programs.git = {

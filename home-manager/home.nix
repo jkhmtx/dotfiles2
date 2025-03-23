@@ -44,6 +44,10 @@ programs.neovim = {
   defaultEditor = true;
 };
 
+programs.kitty = {
+  enable = true;
+};
+
 programs.git = {
   enable = true;
 

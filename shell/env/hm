@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+HOME_MANAGER_DIR="${HOME}/dotfiles/home-manager"
+
+case "${1:-}" in
+	edit | e)
+		nvim "${HOME_MANAGER_DIR}/home.nix"
+	;;
+	'' | switch | rebuild)
+		home-manager --flake "${HOME_MANAGER_DIR}" switch
+	;;
+	*)
+		>&2 echo "Invalid option: ${1}"
+		exit 1
+	;;
+esac

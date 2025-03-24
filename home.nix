@@ -26,13 +26,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-programs.neovim = {
-  enable = true;
-  viAlias = true;
-  vimAlias = true;
-  defaultEditor = true;
-};
-
 programs.kitty = {
   enable = true;
 

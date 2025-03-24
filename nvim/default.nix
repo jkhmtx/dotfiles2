@@ -29,25 +29,127 @@ in {
       # they refer to how multiple categoryDefinitions get merged together by the module.
       # for useage of this section, refer to :h nixCats.flake.outputs.categories
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
-        lspsAndRuntimeDeps = {
-          general = [];
+        lspsAndRuntimeDeps = with pkgs; {
+          general = [
+	    universal-ctags
+            ripgrep
+            fd
+            stdenv.cc.cc
+            stylua
+	  ];
+
+	  lua = [
+	    lua-language-server
+	  ];
+
+	  nix = [
+	    nix-doc
+	    nixd
+          ];
         };
+
+	# This is for plugins that will load at startup without using packadd:
         startupPlugins = {
-          general = [];
-          # themer = with pkgs; [
-          #   # you can even make subcategories based on categories and settings sets!
-          #   (builtins.getAttr packageDef.categories.colorscheme {
-          #       "onedark" = onedark-vim;
-          #       "catppuccin" = catppuccin-nvim;
-          #       "catppuccin-mocha" = catppuccin-nvim;
-          #       "tokyonight" = tokyonight-nvim;
-          #       "tokyonight-day" = tokyonight-nvim;
-          #     }
-          #   )
-          # ];
+          general = with pkgs.vimPlugins; {
+            # you can make subcategories!!!
+            # (always isnt a special name, just the one I chose for this subcategory)
+            always = [
+              lze
+              lzextras
+              # vim-repeat
+              plenary-nvim
+              nvim-notify
+            ];
+            extra = [
+              oil-nvim
+              # nvim-web-devicons
+            ];
+          };
+
+          # You can retreive information from the
+          # packageDefinitions of the package this was packaged with.
+          themer = with pkgs.vimPlugins;
+            (builtins.getAttr (categories.colorscheme or "onedark") {
+                # Theme switcher without creating a new category
+                "onedark" = onedark-nvim;
+                "catppuccin" = catppuccin-nvim;
+                "catppuccin-mocha" = catppuccin-nvim;
+                "tokyonight" = tokyonight-nvim;
+                "tokyonight-day" = tokyonight-nvim;
+              }
+            );
         };
+
         optionalPlugins = {
-          general = [];
+          lint = with pkgs.vimPlugins; [
+            nvim-lint
+          ];
+
+          format = with pkgs.vimPlugins; [
+            conform-nvim
+          ];
+
+          markdown = with pkgs.vimPlugins; [
+            markdown-preview-nvim
+          ];
+
+          lua = with pkgs.vimPlugins; [
+            lazydev-nvim
+          ];
+
+          general = {
+            cmp = with pkgs.vimPlugins; [
+              # cmp stuff
+              nvim-cmp
+              luasnip
+              friendly-snippets
+              cmp_luasnip
+              cmp-buffer
+              cmp-path
+              cmp-nvim-lua
+              cmp-nvim-lsp
+              cmp-cmdline
+              cmp-nvim-lsp-signature-help
+              cmp-cmdline-history
+              lspkind-nvim
+            ];
+
+            treesitter = with pkgs.vimPlugins; [
+              nvim-treesitter-textobjects
+              (nvim-treesitter.withPlugins (
+                plugins: with plugins; [
+                  nix
+                  lua
+                ]
+              ))
+            ];
+
+            telescope = with pkgs.vimPlugins; [
+              telescope-fzf-native-nvim
+              telescope-ui-select-nvim
+              telescope-nvim
+            ];
+
+            always = with pkgs.vimPlugins; [
+              nvim-lspconfig
+              lualine-nvim
+              gitsigns-nvim
+              # vim-sleuth
+              # vim-fugitive
+              # vim-rhubarb
+              nvim-surround
+            ];
+
+            extra = with pkgs.vimPlugins; [
+              fidget-nvim
+              # lualine-lsp-progress
+              which-key-nvim
+              comment-nvim
+              undotree
+              indent-blankline-nvim
+              vim-startuptime
+            ];
+          };
         };
         # shared libraries to be added to LD_LIBRARY_PATH
         # variable available to nvim runtime
@@ -56,8 +158,10 @@ in {
             # libgit2
           ];
         };
+
         environmentVariables = {
         };
+
         extraWrapperArgs = {
         };
         # lists of the functions you would have passed to
@@ -91,17 +195,18 @@ in {
           # and a set of categories that you want
           # (and other information to pass to lua)
           categories = {
+	    colorscheme = "catppuccin-mocha";
+
             general = true;
-            test = true;
-            example = {
-              youCan = "add more than just booleans";
-              toThisSet = [
-                "and the contents of this categories set"
-                "will be accessible to your lua with"
-                "nixCats('path.to.value')"
-                "see :help nixCats"
-              ];
-            };
+            themer = true;
+
+            nix = true;
+            lua = true;
+
+	    lint = true;
+	    format = true;
+	    markdown = true;
+
           };
         };
       };

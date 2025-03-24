@@ -1,11 +1,16 @@
-{ config, lib, home, inputs, ... }: let
+{
+  config,
+  lib,
+  home,
+  inputs,
+  ...
+}: let
   utils = inputs.nixCats.utils;
 in {
   imports = [
     inputs.nixCats.homeModule
   ];
   config = {
-
     home.sessionVariables.EDITOR = "${config.nixCats.out.packages.nvim}/bin/nvim";
 
     # this value, nixCats is the defaultPackageName you pass to mkNixosModules
@@ -16,40 +21,52 @@ in {
       # this will add the overlays from ./overlays and also,
       # add any plugins in inputs named "plugins-pluginName" to pkgs.neovimPlugins
       # It will not apply to overall system, just nixCats.
-      addOverlays = /* (import ./overlays inputs) ++ */ [
-        (utils.standardPluginOverlay inputs)
-      ];
+      addOverlays =
+        /*
+        (import ./overlays inputs) ++
+        */
+        [
+          (utils.standardPluginOverlay inputs)
+        ];
       # see the packageDefinitions below.
       # This says which of those to install.
-      packageNames = [ "nvim" ];
+      packageNames = ["nvim"];
 
       luaPath = "${./config}";
 
       # the .replace vs .merge options are for modules based on existing configurations,
       # they refer to how multiple categoryDefinitions get merged together by the module.
       # for useage of this section, refer to :h nixCats.flake.outputs.categories
-      categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
+      categoryDefinitions.replace = {
+        pkgs,
+        settings,
+        categories,
+        extra,
+        name,
+        mkNvimPlugin,
+        ...
+      } @ packageDef: {
         lspsAndRuntimeDeps = with pkgs; {
           general = [
-	    universal-ctags
+            universal-ctags
             ripgrep
             fd
             stdenv.cc.cc
             stylua
-	  ];
+          ];
 
-	  lua = [
-	    lua-language-server
-	  ];
+          lua = [
+            lua-language-server
+          ];
 
-	  nix = [
-	    nix-doc
-	    nixd
+          nix = [
             alejandra
+            nix-doc
+            nixd
           ];
         };
 
-	# This is for plugins that will load at startup without using packadd:
+        # This is for plugins that will load at startup without using packadd:
         startupPlugins = {
           general = with pkgs.vimPlugins; {
             # you can make subcategories!!!
@@ -69,16 +86,16 @@ in {
 
           # You can retreive information from the
           # packageDefinitions of the package this was packaged with.
-          themer = with pkgs.vimPlugins;
-            (builtins.getAttr (categories.colorscheme or "onedark") {
-                # Theme switcher without creating a new category
-                "onedark" = onedark-nvim;
-                "catppuccin" = catppuccin-nvim;
-                "catppuccin-mocha" = catppuccin-nvim;
-                "tokyonight" = tokyonight-nvim;
-                "tokyonight-day" = tokyonight-nvim;
-              }
-            );
+          themer = with pkgs.vimPlugins; (
+            builtins.getAttr (categories.colorscheme or "onedark") {
+              # Theme switcher without creating a new category
+              "onedark" = onedark-nvim;
+              "catppuccin" = catppuccin-nvim;
+              "catppuccin-mocha" = catppuccin-nvim;
+              "tokyonight" = tokyonight-nvim;
+              "tokyonight-day" = tokyonight-nvim;
+            }
+          );
         };
 
         optionalPlugins = {
@@ -118,10 +135,11 @@ in {
             treesitter = with pkgs.vimPlugins; [
               nvim-treesitter-textobjects
               (nvim-treesitter.withPlugins (
-                plugins: with plugins; [
-                  nix
-                  lua
-                ]
+                plugins:
+                  with plugins; [
+                    nix
+                    lua
+                  ]
               ))
             ];
 
@@ -177,26 +195,26 @@ in {
         # populates $LUA_PATH and $LUA_CPATH
         extraLuaPackages = {
         };
-      });
+      };
 
       # see :help nixCats.flake.outputs.packageDefinitions
       packageDefinitions.replace = {
         # These are the names of your packages
         # you can include as many as you wish.
-        nvim = {pkgs , ... }: {
+        nvim = {pkgs, ...}: {
           # they contain a settings set defined above
           # see :help nixCats.flake.outputs.settings
           settings = {
             wrapRc = true;
             # IMPORTANT:
             # your alias may not conflict with your other packages.
-            aliases = [ "vim" "vi" ];
+            aliases = ["vim" "vi"];
             # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
           };
           # and a set of categories that you want
           # (and other information to pass to lua)
           categories = {
-	    colorscheme = "catppuccin-mocha";
+            colorscheme = "catppuccin-mocha";
 
             general = true;
             themer = true;
@@ -204,14 +222,12 @@ in {
             nix = true;
             lua = true;
 
-	    lint = true;
-	    format = true;
-	    markdown = true;
-
+            lint = true;
+            format = true;
+            markdown = true;
           };
         };
       };
     };
   };
-
 }

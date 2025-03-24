@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jakeh";
@@ -26,43 +28,43 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-programs.kitty = {
-  enable = true;
+  programs.kitty = {
+    enable = true;
 
-  shellIntegration.enableZshIntegration = true;
+    shellIntegration.enableZshIntegration = true;
 
-  themeFile = "Catppuccin-Macchiato";
-};
+    themeFile = "Catppuccin-Macchiato";
+  };
 
-programs.git = {
-  enable = true;
+  programs.git = {
+    enable = true;
 
-  userEmail = "jakehamtexas@gmail.com";
-  userName = "Jake Hamilton";
+    userEmail = "jakehamtexas@gmail.com";
+    userName = "Jake Hamilton";
 
-  ignores = [
-    "*~"
-    "*.swp"
+    ignores = [
+      "*~"
+      "*.swp"
+    ];
+  };
+
+  programs.oh-my-posh = {
+    enable = true;
+
+    # Managed in programs.zsh.initExtra
+    enableZshIntegration = false;
+  };
+
+  home.sessionPath = [
+    "${config.home.homeDirectory}/dotfiles/shell/path"
   ];
-};
 
-programs.oh-my-posh = {
-  enable = true;
+  programs.zsh = {
+    enable = true;
 
-  # Managed in programs.zsh.initExtra
-  enableZshIntegration = false;
-};
-
-home.sessionPath = [
-  "${config.home.homeDirectory}/dotfiles/shell/path"
-];
-
-programs.zsh = {
-  enable = true;
-
-  initExtra = ''
-  # Prompt theming
-  eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
-  '';
-};
+    initExtra = ''
+      # Prompt theming
+      eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
+    '';
+  };
 }

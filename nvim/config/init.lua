@@ -7,4 +7,3 @@ vim.cmd.colorscheme(nixCats("colorscheme"))
 
 require("netrw")
 require("format")
-require("auto")

@@ -45,6 +45,7 @@ in {
 	  nix = [
 	    nix-doc
 	    nixd
+            alejandra
           ];
         };
 

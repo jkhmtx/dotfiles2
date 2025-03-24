@@ -5,14 +5,14 @@ set -euo pipefail
 HOME_MANAGER_DIR="${HOME}/dotfiles"
 
 case "${1:-}" in
-	edit | e)
-		nvim "${HOME_MANAGER_DIR}/home.nix"
-	;;
-	s)
-		shift
-		home-manager --flake "${HOME_MANAGER_DIR}" switch "${@}"
-	;;
-	*)
-		home-manager --flake "${HOME_MANAGER_DIR}" "${@}"
-	;;
+edit | e)
+  nvim "${HOME_MANAGER_DIR}/home.nix"
+  ;;
+s)
+  shift
+  home-manager --flake "${HOME_MANAGER_DIR}" switch "${@}"
+  ;;
+*)
+  home-manager --flake "${HOME_MANAGER_DIR}" "${@}"
+  ;;
 esac

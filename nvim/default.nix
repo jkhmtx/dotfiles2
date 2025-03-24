@@ -64,6 +64,10 @@ in {
             nix-doc
             nixd
           ];
+
+          shell = [
+            shfmt
+          ];
         };
 
         # This is for plugins that will load at startup without using packadd:
@@ -214,17 +218,20 @@ in {
           # and a set of categories that you want
           # (and other information to pass to lua)
           categories = {
+            # Core
             colorscheme = "catppuccin-mocha";
-
             general = true;
             themer = true;
 
-            nix = true;
+            # Languages
             lua = true;
+            markdown = true;
+            shell = true;
+            nix = true;
 
+            # Concerns
             lint = true;
             format = true;
-            markdown = true;
           };
         };
       };

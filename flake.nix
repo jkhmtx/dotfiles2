@@ -5,7 +5,14 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixCats.url = "github:BirdeeHub/nixCats-nvim";
+    nixCats = {
+      url = "github:BirdeeHub/nixCats-nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -36,6 +43,7 @@
       modules = [
         ./home.nix
         ./nvim/default.nix
+        ./sops/default.nix
       ];
 
       # Optionally use extraSpecialArgs

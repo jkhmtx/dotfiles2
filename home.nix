@@ -24,6 +24,7 @@
 
   home.packages = [
     pkgs.direnv
+    pkgs.sops
     pkgs.xclip
     pkgs._1password-cli
   ];

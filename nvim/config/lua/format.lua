@@ -2,6 +2,7 @@ local formatters_by_ft = {
 	lua = { "stylua" },
 	nix = { "alejandra" },
 	sh = { "shfmt" },
+	toml = { "taplo", command = "taplo format -" },
 	-- go = { "gofmt", "golint" },
 	-- templ = { "templ" },
 	-- Conform will run multiple formatters sequentially

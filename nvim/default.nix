@@ -68,6 +68,10 @@ in {
           shell = [
             shfmt
           ];
+
+          toml = [
+            taplo
+          ];
         };
 
         # This is for plugins that will load at startup without using packadd:
@@ -228,6 +232,7 @@ in {
             markdown = true;
             shell = true;
             nix = true;
+            toml = true;
 
             # Concerns
             lint = true;

@@ -18,6 +18,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = [
+    pkgs.direnv
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

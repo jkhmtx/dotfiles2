@@ -12,6 +12,20 @@ s)
   shift
   home-manager --flake "${HOME_MANAGER_DIR}" switch "${@}"
   ;;
+gc)
+  # With thanks to kamadorueda
+
+  # https://github.com/kamadorueda/machine/blob/b2350895cdbc9d063de59f13cd83ccb3f89e8f1a/gc-generations#L1
+  nix profile wipe-history \
+    --profile /nix/var/nix/profiles/system \
+    --older-than 28d
+
+  # https://github.com/kamadorueda/machine/blob/b2350895cdbc9d063de59f13cd83ccb3f89e8f1a/gc-store#L1
+  nix profile wipe-history
+  nix store gc
+  nix store optimise
+  ;;
+
 *)
   home-manager --flake "${HOME_MANAGER_DIR}" "${@}"
   ;;

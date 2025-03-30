@@ -1,12 +1,17 @@
 {
   config,
   pkgs,
+  wellKnown,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "jakeh";
-  home.homeDirectory = "/home/jakeh";
+  home = {
+    inherit (wellKnown) username homeDirectory;
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -19,15 +24,13 @@
 
   home.packages = [
     pkgs.direnv
+    pkgs.xclip
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   programs.kitty = {
     enable = true;

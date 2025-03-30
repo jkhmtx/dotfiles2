@@ -25,6 +25,7 @@
   home.packages = [
     pkgs.direnv
     pkgs.xclip
+    pkgs._1password-cli
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -69,6 +70,14 @@
     initExtra = ''
       # Prompt theming
       eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
+
+      # Completions
+      source ${./shell/completions/op.sh}
     '';
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (pkgs.lib.getName pkg) [
+      "1password-cli"
+    ];
 }

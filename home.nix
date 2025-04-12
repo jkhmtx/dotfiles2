@@ -24,6 +24,7 @@
 
   home.packages = [
     pkgs.direnv
+    pkgs.ssh-to-age
     pkgs.sops
     pkgs.xclip
     pkgs._1password-cli

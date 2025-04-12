@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export NIXOS_DIR="${NIXOS_DIR}"
+
+sudo cp -sf --update=all -x "${NIXOS_DIR}"/* /etc/nixos/
+
+sudo nixos-rebuild "${@}"

@@ -25,8 +25,8 @@
     home-manager,
     ...
   }: let
-    system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    system = "x86_64-linux";
     wellKnown = (pkgs.callPackage ./well-known/default.nix) {};
   in {
     homeConfigurations."jakeh" = home-manager.lib.homeManagerConfiguration {

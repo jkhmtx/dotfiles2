@@ -28,6 +28,7 @@
     pkgs.sops
     pkgs.xclip
     pkgs._1password-cli
+    pkgs.tree
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

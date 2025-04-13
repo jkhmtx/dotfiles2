@@ -2,8 +2,13 @@
 
 set -euo pipefail
 
-export NIXOS_DIR="${NIXOS_DIR}"
+nixos_dir="$(nix eval '#.nixosDir')"
 
-sudo cp -sf --update=all -x "${NIXOS_DIR}"/* /etc/nixos/
+sudo cp \
+  --force \
+  --update=all \
+  --symbolic-link \
+  --one-file-system \
+  "${nixos_dir}"/* /etc/nixos/
 
 sudo nixos-rebuild "${@}"

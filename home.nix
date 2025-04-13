@@ -70,9 +70,6 @@
     enable = true;
 
     initExtra = ''
-      # Vars
-      export NIXOS_DIR="${./nixos}"
-
       # Prompt theming
       eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
 

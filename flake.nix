@@ -48,5 +48,7 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
+
+    nixosDir = ./nixos;
   };
 }

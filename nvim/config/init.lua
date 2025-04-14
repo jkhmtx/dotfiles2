@@ -1,10 +1,11 @@
-require("opts")
-require("maps")
+require("my.opts")
+require("my.maps")
 
 require("lze").register_handlers(require("lzextras").lsp)
 
 vim.cmd.colorscheme(nixCats("colorscheme"))
 
-require("netrw")
-require("format")
-require("lsp")
+require("my.netrw")
+require("my.format")
+require("my.lint")
+require("my.lsp")

@@ -1,0 +1,5 @@
+# Allow opening any 'source'd file, even if not specified as input
+external-sources=true
+
+# Turn on warnings for unassigned uppercase variables
+enable=check-unassigned-uppercase

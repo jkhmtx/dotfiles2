@@ -3,7 +3,7 @@
   pkgs,
   wellKnown,
   ...
-}: {
+} @ inputs: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {
@@ -35,6 +35,11 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    "${config.home.homeDirectory}/shellcheckrc" = {
+      enable = true;
+      force = true;
+      source = "${./shell/shellcheckrc}";
+    };
   };
 
   programs.kitty = {
@@ -65,19 +70,13 @@
   };
 
   home.sessionPath = [
-    "${config.home.homeDirectory}/dotfiles/shell/path"
+    "${./shell/path}"
   ];
 
   programs.zsh = {
     enable = true;
 
-    initExtra = ''
-      # Prompt theming
-      eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ${./shell/oh-my-posh/conf.toml})"
-
-      # Completions
-      source ${./shell/completions/op.sh}
-    '';
+    initExtra = builtins.readFile "${pkgs.callPackage ./shell/zsh-init inputs}/bin/zsh-init";
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:

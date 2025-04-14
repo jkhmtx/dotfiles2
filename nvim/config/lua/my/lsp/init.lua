@@ -11,12 +11,16 @@ end
 
 require("lze").load({
 	mod({
-		"lsp.lua",
+		"my.lsp.lua",
 		ft = "lua",
 	}),
 	mod({
-		"lsp.nix",
+		"my.lsp.nix",
 		ft = "nix",
+	}),
+	mod({
+		"my.lsp.bash",
+		ft = { "bash", "sh" },
 	}),
 })
 

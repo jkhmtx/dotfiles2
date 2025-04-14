@@ -60,6 +60,8 @@ in {
           ];
 
           shell = [
+            bash-language-server
+            shellcheck
             shfmt
           ];
 
@@ -178,10 +180,6 @@ in {
 
         extraWrapperArgs = {
         };
-        # lists of the functions you would have passed to
-        # python.withPackages or lua.withPackages
-
-        # populates $LUA_PATH and $LUA_CPATH
         extraLuaPackages = {
         };
       };

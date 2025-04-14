@@ -134,21 +134,14 @@ in {
 
             treesitter = with pkgs.vimPlugins; [
               nvim-treesitter-textobjects
-              (nvim-treesitter.withPlugins (
-                plugins:
-                  with plugins; [
-                    nix
-                    lua
-                  ]
-              ))
+              nvim-treesitter
             ];
 
-            # telescope = with pkgs.vimPlugins; [
-            #   telescope-fzf-native-nvim
-            #   telescope-ui-select-nvim
-            #   telescope-nvim
-            # ];
-            #
+            telescope = with pkgs.vimPlugins; [
+              telescope-fzf-native-nvim
+              telescope-nvim
+            ];
+
             # always = with pkgs.vimPlugins; [
             #   nvim-lspconfig
             #   lualine-nvim

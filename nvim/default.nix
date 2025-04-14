@@ -120,25 +120,25 @@ in {
           ];
 
           lua = with pkgs.vimPlugins; [
-            lazydev-nvim
+            # lazydev-nvim
           ];
 
           general = {
-            cmp = with pkgs.vimPlugins; [
-              # cmp stuff
-              nvim-cmp
-              luasnip
-              friendly-snippets
-              cmp_luasnip
-              cmp-buffer
-              cmp-path
-              cmp-nvim-lua
-              cmp-nvim-lsp
-              cmp-cmdline
-              cmp-nvim-lsp-signature-help
-              cmp-cmdline-history
-              lspkind-nvim
-            ];
+            # cmp = with pkgs.vimPlugins; [
+            #   # cmp stuff
+            #   nvim-cmp
+            #   luasnip
+            #   friendly-snippets
+            #   cmp_luasnip
+            #   cmp-buffer
+            #   cmp-path
+            #   cmp-nvim-lua
+            #   cmp-nvim-lsp
+            #   cmp-cmdline
+            #   cmp-nvim-lsp-signature-help
+            #   cmp-cmdline-history
+            #   lspkind-nvim
+            # ];
 
             treesitter = with pkgs.vimPlugins; [
               nvim-treesitter-textobjects
@@ -151,31 +151,31 @@ in {
               ))
             ];
 
-            telescope = with pkgs.vimPlugins; [
-              telescope-fzf-native-nvim
-              telescope-ui-select-nvim
-              telescope-nvim
-            ];
-
-            always = with pkgs.vimPlugins; [
-              nvim-lspconfig
-              lualine-nvim
-              gitsigns-nvim
-              # vim-sleuth
-              # vim-fugitive
-              # vim-rhubarb
-              nvim-surround
-            ];
-
-            extra = with pkgs.vimPlugins; [
-              fidget-nvim
-              # lualine-lsp-progress
-              which-key-nvim
-              comment-nvim
-              undotree
-              indent-blankline-nvim
-              vim-startuptime
-            ];
+            # telescope = with pkgs.vimPlugins; [
+            #   telescope-fzf-native-nvim
+            #   telescope-ui-select-nvim
+            #   telescope-nvim
+            # ];
+            #
+            # always = with pkgs.vimPlugins; [
+            #   nvim-lspconfig
+            #   lualine-nvim
+            #   gitsigns-nvim
+            #   # vim-sleuth
+            #   # vim-fugitive
+            #   # vim-rhubarb
+            #   nvim-surround
+            # ];
+            #
+            # extra = with pkgs.vimPlugins; [
+            #   fidget-nvim
+            #   # lualine-lsp-progress
+            #   which-key-nvim
+            #   comment-nvim
+            #   undotree
+            #   indent-blankline-nvim
+            #   vim-startuptime
+            # ];
           };
         };
         # shared libraries to be added to LD_LIBRARY_PATH
@@ -194,12 +194,6 @@ in {
         # lists of the functions you would have passed to
         # python.withPackages or lua.withPackages
 
-        # get the path to this python environment
-        # in your lua config via
-        # vim.g.python3_host_prog
-        # or run from nvim terminal via :!<packagename>-python3
-        extraPython3Packages = {
-        };
         # populates $LUA_PATH and $LUA_CPATH
         extraLuaPackages = {
         };

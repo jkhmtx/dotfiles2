@@ -7,9 +7,6 @@ vim.lsp.config["nixd"] = {
 			nixpkgs = {
 				expr = "import <nixpkgs> { }",
 			},
-			formatting = {
-				command = { "alejandra" },
-			},
 			options = {
 				nixos = {
 					expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.jakeh.options',

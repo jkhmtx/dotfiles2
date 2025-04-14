@@ -15,7 +15,7 @@ require("lze").load({
 	{
 		"conform.nvim",
 		ft = vim.tbl_keys(formatters_by_ft),
-		after = function(plugin)
+		after = function()
 			local conform = require("conform")
 
 			conform.setup({

@@ -1,7 +1,5 @@
 {
   config,
-  lib,
-  home,
   inputs,
   ...
 }: let
@@ -39,13 +37,9 @@ in {
       # for useage of this section, refer to :h nixCats.flake.outputs.categories
       categoryDefinitions.replace = {
         pkgs,
-        settings,
         categories,
-        extra,
-        name,
-        mkNvimPlugin,
         ...
-      } @ packageDef: {
+      }: {
         lspsAndRuntimeDeps = with pkgs; {
           general = [
             universal-ctags
@@ -119,10 +113,6 @@ in {
             markdown-preview-nvim
           ];
 
-          lua = with pkgs.vimPlugins; [
-            # lazydev-nvim
-          ];
-
           general = {
             # cmp = with pkgs.vimPlugins; [
             #   # cmp stuff
@@ -181,9 +171,6 @@ in {
         # shared libraries to be added to LD_LIBRARY_PATH
         # variable available to nvim runtime
         sharedLibraries = {
-          general = with pkgs; [
-            # libgit2
-          ];
         };
 
         environmentVariables = {
@@ -203,7 +190,7 @@ in {
       packageDefinitions.replace = {
         # These are the names of your packages
         # you can include as many as you wish.
-        nvim = {pkgs, ...}: {
+        nvim = {...}: {
           # they contain a settings set defined above
           # see :help nixCats.flake.outputs.settings
           settings = {

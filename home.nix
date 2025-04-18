@@ -3,7 +3,9 @@
   pkgs,
   wellKnown,
   ...
-} @ inputs: {
+} @ inputs: let
+  fzf = pkgs.fzf;
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {
@@ -30,6 +32,7 @@
     pkgs._1password-cli
     pkgs.tree
     pkgs.ripgrep
+    fzf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -78,7 +81,14 @@
 
     initExtra = builtins.readFile "${pkgs.callPackage ./shell/zsh-init inputs}/bin/zsh-init";
 
+    historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    package = fzf;
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:

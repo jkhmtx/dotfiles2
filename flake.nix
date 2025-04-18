@@ -27,8 +27,6 @@
   }: let
     pkgs = nixpkgs.legacyPackages.${system};
     system = "x86_64-linux";
-    allowUnfreePredicate = pkg:
-      builtins.elem (pkgs.lib.getName pkg) (nixpkgs.lib.callPackage ./secrets/unfree.nix {});
   in {
     homeConfigurations."jakeh" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -37,24 +35,17 @@
         inherit (self) inputs;
       };
 
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
       modules = [
         ./dev/direnv
         ./dev/git
         ./dev/nvim
         ./home-manager
         ./hosts/nixos.nix
-        ./shell
         ./secrets
+        ./shell
         ./term
       ];
-
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
     };
-
-    nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
 
     nixosDir = ./nixos;
   };

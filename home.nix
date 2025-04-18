@@ -1,11 +1,8 @@
 {
-  config,
   pkgs,
   wellKnown,
   ...
-} @ inputs: let
-  fzf = pkgs.fzf;
-in {
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {
@@ -28,22 +25,8 @@ in {
     pkgs.direnv
     pkgs.ssh-to-age
     pkgs.sops
-    pkgs.xclip
     pkgs._1password-cli
-    pkgs.tree
-    pkgs.ripgrep
-    fzf
   ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    "${config.home.homeDirectory}/shellcheckrc" = {
-      enable = true;
-      force = true;
-      source = "${./shell/shellcheckrc}";
-    };
-  };
 
   programs.kitty = {
     enable = true;
@@ -63,32 +46,6 @@ in {
       "*~"
       "*.swp"
     ];
-  };
-
-  programs.oh-my-posh = {
-    enable = true;
-
-    # Managed in programs.zsh.initExtra
-    enableZshIntegration = false;
-  };
-
-  home.sessionPath = [
-    "${./shell/path}"
-  ];
-
-  programs.zsh = {
-    enable = true;
-
-    initExtra = builtins.readFile "${pkgs.callPackage ./shell/zsh-init inputs}/bin/zsh-init";
-
-    historySubstringSearch.enable = true;
-    syntaxHighlighting.enable = true;
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    package = fzf;
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:

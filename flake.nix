@@ -42,8 +42,9 @@
       # the path to your home.nix.
       modules = [
         ./home.nix
-        ./nvim/default.nix
-        ./sops/default.nix
+        ./nvim
+        ./shell
+        ./sops
       ];
 
       # Optionally use extraSpecialArgs

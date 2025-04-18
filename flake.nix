@@ -44,7 +44,7 @@
         ./home.nix
         ./nvim
         ./shell
-        ./sops
+        ./secrets
       ];
 
       # Optionally use extraSpecialArgs

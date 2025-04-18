@@ -23,9 +23,6 @@
 
   home.packages = [
     pkgs.direnv
-    pkgs.ssh-to-age
-    pkgs.sops
-    pkgs._1password-cli
   ];
 
   programs.kitty = {

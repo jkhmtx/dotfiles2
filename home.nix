@@ -25,26 +25,6 @@
     pkgs.direnv
   ];
 
-  programs.kitty = {
-    enable = true;
-
-    shellIntegration.enableZshIntegration = true;
-
-    themeFile = "Catppuccin-Macchiato";
-  };
-
-  programs.git = {
-    enable = true;
-
-    userEmail = "jakehamtexas@gmail.com";
-    userName = "Jake Hamilton";
-
-    ignores = [
-      "*~"
-      "*.swp"
-    ];
-  };
-
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [
       "1password-cli"

@@ -77,6 +77,8 @@
     enable = true;
 
     initExtra = builtins.readFile "${pkgs.callPackage ./shell/zsh-init inputs}/bin/zsh-init";
+
+    syntaxHighlighting.enable = true;
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:

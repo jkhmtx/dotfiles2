@@ -28,14 +28,12 @@
   }: let
     pkgs = nixpkgs.legacyPackages.${system};
     system = "x86_64-linux";
-    wellKnown = (pkgs.callPackage ./well-known/default.nix) {};
   in {
     homeConfigurations."jakeh" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
       extraSpecialArgs = {
         inherit (self) inputs;
-        inherit wellKnown;
       };
 
       # Specify your home configuration modules here, for example,
@@ -43,6 +41,7 @@
       modules = [
         ./git
         ./home.nix
+        ./hosts/nixos.nix
         ./nvim
         ./shell
         ./secrets

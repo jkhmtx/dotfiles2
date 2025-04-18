@@ -1,14 +1,4 @@
-{
-  pkgs,
-  wellKnown,
-  ...
-}: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home = {
-    inherit (wellKnown) username homeDirectory;
-  };
-
+{pkgs, ...}: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 

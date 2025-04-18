@@ -1,6 +1,5 @@
 {
   inputs,
-  wellKnown,
   pkgs,
   lib,
   config,
@@ -16,7 +15,7 @@
 
   config = {
     sops = {
-      age.sshKeyPaths = ["${wellKnown.homeDirectory}/.ssh/id_ed25519"];
+      age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
       defaultSopsFile = ./secrets.yaml;
       secrets.test = {};
     };

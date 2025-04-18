@@ -2,7 +2,6 @@
   description = "Home Manager configuration of jakeh";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixCats = {
@@ -28,6 +27,8 @@
   }: let
     pkgs = nixpkgs.legacyPackages.${system};
     system = "x86_64-linux";
+    allowUnfreePredicate = pkg:
+      builtins.elem (pkgs.lib.getName pkg) (nixpkgs.lib.callPackage ./secrets/unfree.nix {});
   in {
     homeConfigurations."jakeh" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -39,10 +40,11 @@
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
       modules = [
-        ./git
-        ./home.nix
+        ./dev/direnv
+        ./dev/git
+        ./dev/nvim
+        ./home-manager
         ./hosts/nixos.nix
-        ./nvim
         ./shell
         ./secrets
         ./term
@@ -51,6 +53,8 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
+
+    nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
 
     nixosDir = ./nixos;
   };

@@ -38,6 +38,7 @@
       modules = [
         ./dev/direnv
         ./dev/git
+        ./dev/github
         ./dev/nvim
         ./home-manager
         ./hosts/nixos.nix

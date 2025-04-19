@@ -13,5 +13,13 @@
   ],
   "nix": {
     "enabled": true
-  }
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "baseBranches": ["main"],
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "minimumReleaseAge": "3 days"
 }

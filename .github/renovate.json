@@ -1,4 +1,16 @@
 {
+  "extends": [
+    ":dependencyDashboard",
+    "config:recommended",
+    "group:monorepos",
+    "group:recommended",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+    ":configMigration",
+    ":pinDevDependencies",
+    "replacements:all",
+    "workarounds:all"
+  ],
   "nix": {
     "enabled": true
   }

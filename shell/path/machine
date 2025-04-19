@@ -5,6 +5,7 @@ set -euo pipefail
 nixos_dir="$(nix eval '#.nixosDir')"
 
 sudo cp \
+  --recursive \
   --force \
   --update=all \
   --symbolic-link \

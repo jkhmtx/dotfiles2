@@ -4,7 +4,7 @@
   lib,
   config,
   ...
-}: {
+} @ args: {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
   ];
@@ -23,6 +23,7 @@
       pkgs.sops
       pkgs.ssh-to-age
       pkgs._1password-cli
+      (import ./scripts/edit args)
     ];
   };
 }

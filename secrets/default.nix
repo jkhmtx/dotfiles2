@@ -18,6 +18,7 @@
       age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
       defaultSopsFile = ./secrets.yaml;
       secrets.test = {};
+      secrets.githubToken = {};
     };
     home.packages = [
       pkgs.sops

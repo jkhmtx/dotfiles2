@@ -46,11 +46,11 @@ in {
             ripgrep
             fd
             stdenv.cc.cc
-            stylua
           ];
 
           lua = [
             lua-language-server
+            stylua
           ];
 
           nix = [
@@ -76,15 +76,16 @@ in {
             # you can make subcategories!!!
             # (always isnt a special name, just the one I chose for this subcategory)
             always = [
+              blink-cmp
               lze
               lzextras
-              # vim-repeat
-              plenary-nvim
               nvim-notify
+              plenary-nvim
+              # vim-repeat
             ];
             extra = [
-              oil-nvim
               # nvim-web-devicons
+              oil-nvim
             ];
           };
 

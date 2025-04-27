@@ -1,10 +1,14 @@
 local mod = function(tbl)
 	local name = tbl[1]
 
+	local capabilities = require("my.completions").capabilities
+
 	return vim.tbl_extend("force", {
 		name,
 		before = function()
-			require(name)
+			require(name)({
+				capabilities = capabilities,
+			})
 		end,
 	}, tbl)
 end

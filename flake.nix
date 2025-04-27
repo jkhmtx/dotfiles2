@@ -25,11 +25,10 @@
     home-manager,
     ...
   }: let
-    pkgs = nixpkgs.legacyPackages.${system};
-    system = "x86_64-linux";
-  in {
-    homeConfigurations."jakeh" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+    pkgsOf = system: nixpkgs.legacyPackages.${system};
+
+    personalHomeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
+      pkgs = pkgsOf "x86_64-linux";
 
       extraSpecialArgs = {
         inherit (self) inputs;
@@ -47,6 +46,54 @@
         ./term
       ];
     };
+
+    mkZshShell = system: shell: let
+      pkgs = pkgsOf system;
+    in
+      pkgs.mkShell {
+        shellHook = ''
+          ${shell}/bin/${shell.name}
+
+          exec zsh --login
+        '';
+      };
+
+    flatMapOf = system: let
+      pkgs = pkgsOf system;
+      inherit (pkgs.lib.lists) flatten;
+    in
+      fn: list: flatten (builtins.map fn list);
+
+    mkDirenv = {
+      system,
+      inputs,
+    }: shellModules: let
+      pkgs = pkgsOf system;
+      flatMap = flatMapOf system;
+      modulesOf = module:
+        import module (inputs
+          // {
+            pkgs = pkgsOf system;
+          });
+      paths = flatMap modulesOf shellModules;
+    in
+      pkgs.symlinkJoin {
+        name = "direnv";
+        inherit paths;
+      };
+
+    personalSecrets = personalHomeManagerConfiguration.config.sops.secrets;
+    mkDirenvOf = system:
+      mkDirenv {
+        inherit system;
+        inputs = {secrets = personalSecrets;};
+      } [];
+  in {
+    packages."x86_64-linux".dotfiles = mkZshShell "x86_64-linux" personalHomeManagerConfiguration.activationPackage;
+
+    packages."x86_64-linux".direnv = mkDirenvOf "x86_64-linux";
+
+    homeConfigurations."jakeh" = personalHomeManagerConfiguration;
 
     nixosDir = ./nixos;
   };

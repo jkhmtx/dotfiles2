@@ -87,7 +87,7 @@
       mkDirenv {
         inherit system;
         inputs = {secrets = personalSecrets;};
-      } [];
+      } [.github/terraform/shell.nix];
   in {
     packages."x86_64-linux".dotfiles = mkZshShell "x86_64-linux" personalHomeManagerConfiguration.activationPackage;
 

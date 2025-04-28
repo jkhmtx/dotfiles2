@@ -1,30 +1,36 @@
-local mod = function(tbl)
-	local name = tbl[1]
+--- @class my.lsp.LspConfigOpts
+--- @field [1] string
+--- @field ft string[]
 
-	local capabilities = require("my.completions").capabilities
+--- @param opts my.lsp.LspConfigOpts
+local lsp_config = function(opts)
+	local name = opts[1]
 
 	return vim.tbl_extend("force", {
 		name,
 		before = function()
-			require(name)({
-				capabilities = capabilities,
-			})
+			local lsp_modules_opts = {
+				capabilities = require("my.completions").get_capabilities(),
+				filetypes = opts.ft,
+			}
+
+			require(name)(lsp_modules_opts)
 		end,
-	}, tbl)
+	}, opts)
 end
 
 require("lze").load({
-	mod({
-		"my.lsp.lua",
-		ft = "lua",
-	}),
-	mod({
-		"my.lsp.nix",
-		ft = "nix",
-	}),
-	mod({
+	lsp_config({
 		"my.lsp.bash",
 		ft = { "bash", "sh" },
+	}),
+	lsp_config({
+		"my.lsp.lua",
+		ft = { "lua" },
+	}),
+	lsp_config({
+		"my.lsp.nix",
+		ft = { "nix" },
 	}),
 })
 

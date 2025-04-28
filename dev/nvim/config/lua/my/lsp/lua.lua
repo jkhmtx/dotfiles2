@@ -1,7 +1,7 @@
 return function(opts)
 	vim.lsp.config["luals"] = {
 		cmd = { "lua-language-server" },
-		filetypes = { "lua" },
+		filetypes = opts.filetypes,
 		root_markers = { ".luarc.json", ".luarc.jsonc" },
 		settings = {
 			Lua = {

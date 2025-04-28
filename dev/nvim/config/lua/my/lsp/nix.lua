@@ -1,7 +1,7 @@
 return function(opts)
 	vim.lsp.config["nixd"] = {
 		cmd = { "nixd" },
-		filetypes = { "nix" },
+		filetypes = opts.filetypes,
 		root_markers = { "flake.lock", ".git" },
 		settings = {
 			nixd = {

@@ -1,7 +1,7 @@
 return function(opts)
 	vim.lsp.config["bash-language-server"] = {
 		cmd = { "bash-language-server", "start" },
-		filetypes = { "bash", "sh" },
+		filetypes = opts.filetypes,
 		root_markers = { ".git" },
 		settings = {
 			bashIde = {

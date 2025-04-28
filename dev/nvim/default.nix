@@ -148,6 +148,10 @@ in {
               telescope-nvim
             ];
 
+            quickfix = with pkgs.vimPlugins; [
+              quicker-nvim
+            ];
+
             # always = with pkgs.vimPlugins; [
             #   nvim-lspconfig
             #   lualine-nvim
@@ -208,8 +212,9 @@ in {
             # Languages
             lua = true;
             markdown = true;
-            shell = true;
             nix = true;
+            shell = true;
+            terraform = true;
             toml = true;
 
             # Concerns

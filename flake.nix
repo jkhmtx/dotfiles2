@@ -27,25 +27,26 @@
   }: let
     pkgsOf = system: nixpkgs.legacyPackages.${system};
 
-    personalHomeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgsOf "x86_64-linux";
+    homeManagerConfigurationOf = system: host:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgsOf system;
 
-      extraSpecialArgs = {
-        inherit (self) inputs;
+        extraSpecialArgs = {
+          inherit (self) inputs;
+        };
+
+        modules = [
+          ./dev/direnv
+          ./dev/git
+          ./dev/github
+          ./dev/nvim
+          ./home-manager
+          host
+          ./secrets
+          ./shell
+          ./term
+        ];
       };
-
-      modules = [
-        ./dev/direnv
-        ./dev/git
-        ./dev/github
-        ./dev/nvim
-        ./home-manager
-        ./hosts/nixos.nix
-        ./secrets
-        ./shell
-        ./term
-      ];
-    };
 
     mkZshShell = system: shell: let
       pkgs = pkgsOf system;
@@ -82,18 +83,26 @@
         inherit paths;
       };
 
-    personalSecrets = personalHomeManagerConfiguration.config.sops.secrets;
+    personalSecretsOf = system: (homeManagerConfigurationOf system).config.sops.secrets;
     mkDirenvOf = system:
       mkDirenv {
         inherit system;
-        inputs = {secrets = personalSecrets;};
+        inputs = {secrets = personalSecretsOf system;};
       } [.github/terraform/shell.nix];
+
+    personalHomeManagerConfiguration = homeManagerConfigurationOf "x86_64-linux" ./hosts/nixos.nix;
+    workHomeManagerConfiguration = homeManagerConfigurationOf "aarch64-darwin" ./hosts/SB-US-B0E2-jhamilton.nix;
   in {
     packages."x86_64-linux".dotfiles = mkZshShell "x86_64-linux" personalHomeManagerConfiguration.activationPackage;
 
     packages."x86_64-linux".direnv = mkDirenvOf "x86_64-linux";
 
+    packages."aarch64-darwin".dotfiles = mkZshShell "aarch64-darwin" workHomeManagerConfiguration.activationPackage;
+
+    packages."aarch64-darwin".direnv = mkDirenvOf "aarch64-darwin";
+
     homeConfigurations."jakeh" = personalHomeManagerConfiguration;
+    homeConfigurations."jake" = workHomeManagerConfiguration;
 
     nixosDir = ./nixos;
   };

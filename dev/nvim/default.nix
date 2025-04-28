@@ -68,6 +68,11 @@ in {
           toml = [
             taplo
           ];
+
+          terraform = [
+            terraform-ls
+            tflint
+          ];
         };
 
         # This is for plugins that will load at startup without using packadd:

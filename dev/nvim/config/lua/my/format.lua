@@ -3,6 +3,9 @@ local formatters_by_ft = {
 	nix = { "alejandra" },
 	sh = { "shfmt" },
 	toml = { "taplo", command = "taplo format -" },
+	terraform = { "terraform", command = "terraform fmt -" },
+	tf = { "terraform", command = "terraform fmt -" },
+	["terraform-vars"] = { "terraform", command = "terraform fmt -" },
 	-- go = { "gofmt", "golint" },
 	-- templ = { "templ" },
 	-- Conform will run multiple formatters sequentially

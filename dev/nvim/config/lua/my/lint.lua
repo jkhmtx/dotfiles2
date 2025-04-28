@@ -1,6 +1,7 @@
 local linters_by_ft = {
 	sh = { "shellcheck" },
 	bash = { "shellcheck" },
+	terraform = { "tflint" },
 }
 
 require("lze").load({

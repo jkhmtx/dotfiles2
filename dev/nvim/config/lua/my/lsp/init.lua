@@ -32,6 +32,10 @@ require("lze").load({
 		"my.lsp.nix",
 		ft = { "nix" },
 	}),
+	lsp_config({
+		"my.lsp.terraform",
+		ft = { "terraform", "terraform-vars" },
+	}),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

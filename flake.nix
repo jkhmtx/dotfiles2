@@ -42,6 +42,7 @@
           ./dev/nvim
           ./home-manager
           host
+          ./nix
           ./secrets
           ./shell
           ./term

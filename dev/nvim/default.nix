@@ -123,6 +123,11 @@ in {
             conform-nvim
           ];
 
+          javascript = with pkgs.vimPlugins; [
+            nvim-lspconfig
+            typescript-tools-nvim
+          ];
+
           markdown = with pkgs.vimPlugins; [
             markdown-preview-nvim
           ];

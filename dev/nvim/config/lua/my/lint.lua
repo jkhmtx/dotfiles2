@@ -1,4 +1,4 @@
-local js = { "biome", { "./node_modules/eslint/bin.js", "eslint" } }
+local js = { "biomejs", "eslint" }
 local linters_by_ft = {
 	sh = { "shellcheck" },
 	bash = { "shellcheck" },

@@ -36,6 +36,10 @@ require("lze").load({
 		"my.lsp.terraform",
 		ft = { "terraform", "terraform-vars" },
 	}),
+	lsp_config({
+		"my.lsp.javascript",
+		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	}),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

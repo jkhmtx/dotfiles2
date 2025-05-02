@@ -1,11 +1,31 @@
+local terraform = { "terraform", command = "terraform fmt -" }
+local prettier = { "prettier" }
+
 local formatters_by_ft = {
 	lua = { "stylua" },
 	nix = { "alejandra" },
 	sh = { "shfmt" },
 	toml = { "taplo", command = "taplo format -" },
-	terraform = { "terraform", command = "terraform fmt -" },
-	tf = { "terraform", command = "terraform fmt -" },
-	["terraform-vars"] = { "terraform", command = "terraform fmt -" },
+	terraform = terraform,
+	tf = terraform,
+	["terraform-vars"] = terraform,
+
+	javascript = prettier,
+	typescript = prettier,
+	javascriptreact = prettier,
+	typescriptreact = prettier,
+	css = prettier,
+	scss = prettier,
+	less = prettier,
+	html = prettier,
+	json = prettier,
+	jsonc = prettier,
+	yaml = prettier,
+	markdown = prettier,
+	["markdown.mdx"] = prettier,
+	graphql = prettier,
+	handlebars = prettier,
+
 	-- go = { "gofmt", "golint" },
 	-- templ = { "templ" },
 	-- Conform will run multiple formatters sequentially

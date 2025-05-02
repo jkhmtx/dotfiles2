@@ -48,6 +48,12 @@ in {
             stdenv.cc.cc
           ];
 
+          javascript = [
+            biome
+            nodePackages.eslint
+            nodePackages.prettier
+          ];
+
           lua = [
             lua-language-server
             stylua
@@ -216,6 +222,7 @@ in {
             shell = true;
             terraform = true;
             toml = true;
+            javascript = true;
 
             # Concerns
             lint = true;

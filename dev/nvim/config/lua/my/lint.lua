@@ -1,7 +1,12 @@
+local js = { "biome", { "./node_modules/eslint/bin.js", "eslint" } }
 local linters_by_ft = {
 	sh = { "shellcheck" },
 	bash = { "shellcheck" },
 	terraform = { "tflint" },
+	javascript = js,
+	typescript = js,
+	javascriptreact = js,
+	typescriptreact = js,
 }
 
 require("lze").load({

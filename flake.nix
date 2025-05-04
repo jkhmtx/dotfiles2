@@ -74,6 +74,7 @@
       ./dev/nvim
       ./borg
       ./home-manager
+      ./hyprland
       ./secrets
       ./shell
       ./term

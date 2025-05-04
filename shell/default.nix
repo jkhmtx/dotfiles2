@@ -41,7 +41,7 @@ in {
     programs.zsh = {
       enable = true;
 
-      initExtra = builtins.readFile "${pkgs.callPackage ./zsh-init inputs}/bin/zsh-init";
+      initContent = builtins.readFile "${pkgs.callPackage ./zsh-init inputs}/bin/zsh-init";
 
       historySubstringSearch.enable = true;
       syntaxHighlighting.enable = true;

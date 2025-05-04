@@ -88,10 +88,6 @@
     isNormalUser = true;
     description = "Jake Hamilton";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      kate
-      #  thunderbird
-    ];
   };
 
   programs.zsh.enable = true;

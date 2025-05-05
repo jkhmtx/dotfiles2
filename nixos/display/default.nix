@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./hyprland.nix
     ./x11.nix
   ];
 

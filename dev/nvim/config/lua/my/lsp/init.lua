@@ -40,6 +40,10 @@ require("lze").load({
 		"my.lsp.javascript",
 		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 	}),
+	lsp_config({
+		"my.lsp.jq",
+		ft = { "jq" },
+	}),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

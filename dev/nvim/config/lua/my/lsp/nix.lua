@@ -8,6 +8,9 @@ return function(opts)
 				nixpkgs = {
 					expr = "import <nixpkgs> { }",
 				},
+				pkgs = {
+					expr = "import <nixpkgs> { }",
+				},
 				options = {
 					nixos = {
 						expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.jakeh.options',

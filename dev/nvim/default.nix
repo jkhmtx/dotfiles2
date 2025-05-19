@@ -54,6 +54,10 @@ in {
             nodePackages.prettier
           ];
 
+          jq = [
+            jq-lsp
+          ];
+
           lua = [
             lua-language-server
             stylua
@@ -228,6 +232,7 @@ in {
             terraform = true;
             toml = true;
             javascript = true;
+            jq = true;
 
             # Concerns
             lint = true;

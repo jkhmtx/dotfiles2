@@ -8,8 +8,9 @@ in {
   config = {
     home.packages = [
       fzf
-      pkgs.tree
+      pkgs.jq
       pkgs.ripgrep
+      pkgs.tree
       pkgs.xclip
     ];
 

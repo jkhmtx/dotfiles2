@@ -1,5 +1,6 @@
-{...}: {
+{pkgs, ...}: {
   config = {
+    home.packages = [pkgs.delta];
     programs.git = {
       enable = true;
 
@@ -10,6 +11,8 @@
         "*~"
         "*.swp"
       ];
+
+      includes = [{path = ./.gitconfig;}];
     };
   };
 }

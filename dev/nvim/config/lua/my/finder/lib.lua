@@ -22,9 +22,11 @@ end
 M.live_grep = function(opts)
 	opts = opts or {}
 
+	local hidden = opts.hidden or true
+
 	--- @class LiveGrepOpts
 	local live_grep_opts = vim.tbl_deep_extend("force", opts, {})
-	if opts.hidden then
+	if hidden then
 		live_grep_opts.additional_args = function(_)
 			return { "--hidden" }
 		end

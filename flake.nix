@@ -52,6 +52,7 @@
           ./secrets
           ./shell
           ./term
+          ./tmux
         ];
       };
 

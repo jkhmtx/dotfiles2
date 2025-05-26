@@ -93,8 +93,10 @@ in {
               lze
               lzextras
               nvim-notify
+              nvim-surround
               oil-nvim
               plenary-nvim
+              vim-sleuth
               vim-tmux-navigator
             ];
           };
@@ -162,15 +164,13 @@ in {
               quicker-nvim
             ];
 
-            # always = with pkgs.vimPlugins; [
-            #   nvim-lspconfig
-            #   lualine-nvim
-            #   gitsigns-nvim
-            #   # vim-sleuth
-            #   # vim-fugitive
-            #   # vim-rhubarb
-            #   nvim-surround
-            # ];
+            always = with pkgs.vimPlugins; [
+              #   nvim-lspconfig
+              #   lualine-nvim
+              #   gitsigns-nvim
+              #   # vim-fugitive
+              #   # vim-rhubarb
+            ];
             #
             # extra = with pkgs.vimPlugins; [
             #   fidget-nvim

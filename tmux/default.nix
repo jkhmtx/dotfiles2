@@ -32,6 +32,7 @@ in {
       escapeTime = 10;
 
       plugins = [
+        pkgs.tmuxPlugins.vim-tmux-navigator
         {
           plugin = pkgs.tmuxPlugins.catppuccin;
           extraConfig = builtins.readFile ./tmux.catppuccin.conf;

@@ -88,19 +88,14 @@ in {
         # This is for plugins that will load at startup without using packadd:
         startupPlugins = {
           general = with pkgs.vimPlugins; {
-            # you can make subcategories!!!
-            # (always isnt a special name, just the one I chose for this subcategory)
             always = [
               blink-cmp
               lze
               lzextras
               nvim-notify
-              plenary-nvim
-              # vim-repeat
-            ];
-            extra = [
-              # nvim-web-devicons
               oil-nvim
+              plenary-nvim
+              vim-tmux-navigator
             ];
           };
 

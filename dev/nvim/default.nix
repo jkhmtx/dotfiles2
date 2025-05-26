@@ -92,6 +92,7 @@ in {
               blink-cmp
               lze
               lzextras
+              nvim-colorizer-lua
               nvim-notify
               nvim-surround
               oil-nvim

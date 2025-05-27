@@ -23,38 +23,34 @@ vim.keymap.set("c", ">s/", ">smagic/", { desc = "Make replace very magic" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Center the cursor when using CTRL+d" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Center the cursor when using CTRL+u" })
 
+local make_middle_scrolloff_keymap = function(key, is_out_of_bounds)
+	vim.keymap.set("n", key, function()
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local lines = vim.api.nvim_win_get_height(0)
+		local half = math.floor(lines / 2)
+
+		if is_out_of_bounds(row, half) then
+			vim.cmd("normal! zz")
+		end
+
+		vim.o.scrolloff = half
+
+		-- Dealing with word wrap
+		if col == 0 then
+			vim.cmd("normal! g" .. key)
+		else
+			vim.cmd("normal! " .. key)
+		end
+	end, { noremap = true, silent = true, desc = "Keep the cursor in the middle when scrolling down" })
+end
+
 -- Basically "middle scrolloff" all of these things
-vim.keymap.set("n", "j", function()
-	local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-	local lines = vim.api.nvim_win_get_height(0)
-	local half = math.floor(lines / 2)
-
-	local is_lower_than_middle = row >= half
-
-	if is_lower_than_middle then
-		vim.cmd("normal! zz")
-	end
-
-	vim.o.scrolloff = half
-
-	vim.cmd("normal! j")
-end, { desc = "Keep the cursor in the middle when scrolling down" })
-
-vim.keymap.set("n", "k", function()
-	local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-	local lines = vim.api.nvim_win_get_height(0)
-	local half = math.floor(lines / 2)
-
-	local is_higher_than_middle = row < half
-
-	if is_higher_than_middle then
-		vim.cmd("normal! zz")
-	end
-
-	vim.o.scrolloff = half
-
-	vim.cmd("normal! k")
-end, { desc = "Keep the cursor in the middle when scrolling up" })
+make_middle_scrolloff_keymap("j", function(row, half)
+	return row >= half
+end)
+make_middle_scrolloff_keymap("k", function(row, half)
+	return row < half
+end)
 
 vim.keymap.set("n", "n", "nzz", { desc = "Keep the cursor in the middle when searching next" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Keep the cursor in the middle when searching previous" })
@@ -65,10 +61,6 @@ vim.keymap.set("n", "H", "<cmd>bprev<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bl", "<cmd>b#<CR>", { desc = "Last buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "delete buffer" })
-
--- Dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostics
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })

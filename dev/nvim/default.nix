@@ -99,6 +99,7 @@ in {
               plenary-nvim
               vim-sleuth
               vim-tmux-navigator
+              undotree
             ];
           };
 
@@ -135,22 +136,6 @@ in {
           ];
 
           general = {
-            # cmp = with pkgs.vimPlugins; [
-            #   # cmp stuff
-            #   nvim-cmp
-            #   luasnip
-            #   friendly-snippets
-            #   cmp_luasnip
-            #   cmp-buffer
-            #   cmp-path
-            #   cmp-nvim-lua
-            #   cmp-nvim-lsp
-            #   cmp-cmdline
-            #   cmp-nvim-lsp-signature-help
-            #   cmp-cmdline-history
-            #   lspkind-nvim
-            # ];
-
             treesitter = with pkgs.vimPlugins; [
               nvim-treesitter-textobjects
               nvim-treesitter
@@ -166,22 +151,17 @@ in {
             ];
 
             always = with pkgs.vimPlugins; [
-              #   nvim-lspconfig
               #   lualine-nvim
-              #   gitsigns-nvim
-              #   # vim-fugitive
-              #   # vim-rhubarb
+              gitsigns-nvim
             ];
             #
-            # extra = with pkgs.vimPlugins; [
-            #   fidget-nvim
-            #   # lualine-lsp-progress
-            #   which-key-nvim
-            #   comment-nvim
-            #   undotree
-            #   indent-blankline-nvim
-            #   vim-startuptime
-            # ];
+            extra = with pkgs.vimPlugins; [
+              fidget-nvim
+              #   which-key-nvim
+              comment-nvim
+              #   indent-blankline-nvim
+              #   vim-startuptime
+            ];
           };
         };
         # shared libraries to be added to LD_LIBRARY_PATH

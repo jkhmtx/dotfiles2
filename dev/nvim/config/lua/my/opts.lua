@@ -85,7 +85,7 @@ o.shiftwidth = tabstop
 
 -- Decrease update time
 o.updatetime = 250
-o.timeoutlen = 300
+o.timeoutlen = 500
 
 o.termguicolors = true
 

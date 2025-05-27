@@ -9,6 +9,12 @@ local lsp_config = function(opts)
 	return vim.tbl_extend("force", {
 		name,
 		before = function()
+			require("lze").load({
+				"fidget.nvim",
+				after = function()
+					require("fidget").setup({})
+				end,
+			})
 			local lsp_modules_opts = {
 				capabilities = require("my.completions").get_capabilities(),
 				filetypes = opts.ft,

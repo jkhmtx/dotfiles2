@@ -16,7 +16,7 @@ local lsp_config = function(opts)
 				end,
 			})
 			local lsp_modules_opts = {
-				capabilities = require("my.completions").get_capabilities(),
+				capabilities = require("my.completions.lib").get_capabilities(),
 				filetypes = opts.ft,
 			}
 

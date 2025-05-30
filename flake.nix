@@ -2,7 +2,7 @@
   description = "Home Manager configuration of jakeh";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";

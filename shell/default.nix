@@ -12,6 +12,7 @@ in {
       pkgs.ripgrep
       pkgs.tree
       pkgs.xclip
+      (import ./scripts/hm inputs)
     ];
 
     home.file = {

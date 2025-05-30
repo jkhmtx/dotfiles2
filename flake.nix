@@ -25,7 +25,7 @@
     home-manager,
     ...
   }: let
-    config = host: let
+    config = host: modules: let
       inherit (import host) system;
       pkgs = nixpkgs.legacyPackages.${system};
 
@@ -40,20 +40,11 @@
           inherit (self) inputs;
         };
 
-        modules = [
-          (import host).module
-
-          ./dev/direnv
-          ./dev/git
-          ./dev/github
-          ./dev/nvim
-          ./home-manager
-          ./nix
-          ./secrets
-          ./shell
-          ./term
-          ./tmux
-        ];
+        modules =
+          [
+            (import host).module
+          ]
+          ++ modules;
       };
 
       secrets = homeManagerConfiguration.config.sops.secrets;
@@ -76,14 +67,36 @@
       inherit homeManagerConfiguration;
     };
 
-    personal = config ./hosts/nixos.nix;
-    work = config ./hosts/SB-US-B0E2-jhamilton.nix;
+    personal = config ./hosts/nixos.nix [
+      ./dev/direnv
+      ./dev/git
+      ./dev/github
+      ./dev/nvim
+      ./home-manager
+      ./nix
+      ./secrets
+      ./shell
+      ./term
+      ./tmux
+    ];
+    work = config ./hosts/SB-US-B0E2-jhamilton.nix [
+      ./dev/direnv
+      ./dev/git
+      ./dev/github
+      ./dev/nvim
+      ./home-manager
+      ./nix
+      ./secrets
+      ./shell
+      ./term
+      ./tmux
+    ];
   in {
     devShell."x86_64-linux" = personal.devShell;
     devShell."aarch64-darwin" = work.devShell;
 
-    homeConfigurations."jakeh" = personal.homeManagerConfiguration;
-    homeConfigurations."jake" = work.homeManagerConfiguration;
+    homeConfigurations."nixos" = personal.homeManagerConfiguration;
+    homeConfigurations."work" = work.homeManagerConfiguration;
 
     nixosDir = ./nixos;
   };

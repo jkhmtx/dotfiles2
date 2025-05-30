@@ -73,3 +73,7 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate window left" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate window right" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate window down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate window up" })
+
+-- LSP
+
+vim.keymap.set("n", "<leader>lr", require("my.lsp.lib").buf_restart_clients, { desc = "(L)sp (R)estart" })

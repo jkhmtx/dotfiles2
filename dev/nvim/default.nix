@@ -152,6 +152,7 @@ in {
 
             always = with pkgs.vimPlugins; [
               #   lualine-nvim
+              persistence-nvim
               gitsigns-nvim
             ];
             #

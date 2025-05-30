@@ -37,6 +37,11 @@ in {
           plugin = pkgs.tmuxPlugins.catppuccin;
           extraConfig = builtins.readFile ./tmux.catppuccin.conf;
         }
+        pkgs.tmuxPlugins.continuum
+        {
+          plugin = pkgs.tmuxPlugins.resurrect;
+          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+        }
       ];
 
       extraConfig = builtins.readFile ./tmux.conf;

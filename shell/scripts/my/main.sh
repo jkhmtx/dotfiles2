@@ -44,7 +44,15 @@ machine)
     ;;
   rebuild)
     shift
-    NIXOS_CONFIG="${dotfiles_dir}/nixos" sudo nixos-rebuild "${@}"
+
+    NIXOS_CONFIG=${dotfiles_dir}/nixos/configuration.nix
+
+    if test -s "${NIXOS_CONFIG}"; then
+      NIXOS_CONFIG="${NIXOS_CONFIG}" sudo nixos-rebuild "${@}"
+    else
+      echo "Invalid NIXOS_CONFIG: ${NIXOS_CONFIG}"
+      exit 1
+    fi
     ;;
   *)
     echo "Must specify one of: [edit|e|rebuild]"
@@ -53,17 +61,21 @@ machine)
   esac
   ;;
 gc)
-  # With thanks to kamadorueda
+  shift
+  days="${1:?Specify number of days}"
 
+  # With thanks to kamadorueda
   # https://github.com/kamadorueda/machine/blob/b2350895cdbc9d063de59f13cd83ccb3f89e8f1a/gc-generations#L1
-  nix profile wipe-history \
+  sudo nix profile wipe-history \
     --profile /nix/var/nix/profiles/system \
-    --older-than 28d
+    --older-than "${days}"d
 
   # https://github.com/kamadorueda/machine/blob/b2350895cdbc9d063de59f13cd83ccb3f89e8f1a/gc-store#L1
-  nix profile wipe-history
+  sudo nix profile wipe-history --older-than "${days}"d
   nix store gc
   nix store optimise
+
+  home-manager expire-generations "-${days} days"
   ;;
 
 *)

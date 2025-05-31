@@ -77,6 +77,7 @@
       ./shell
       ./term
       ./tmux
+      ./borg
     ];
     work = config ./hosts/SB-US-B0E2-jhamilton.nix [
       ./dev/direnv

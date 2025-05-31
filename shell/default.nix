@@ -12,7 +12,7 @@ in {
       pkgs.ripgrep
       pkgs.tree
       pkgs.xclip
-      (import ./scripts/hm inputs)
+      (import ./scripts/my inputs)
     ];
 
     home.file = {
@@ -35,10 +35,6 @@ in {
       # Managed in programs.zsh.initExtra
       enableZshIntegration = false;
     };
-
-    home.sessionPath = [
-      "${./path}"
-    ];
 
     programs.zsh = {
       enable = true;

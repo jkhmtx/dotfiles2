@@ -29,15 +29,14 @@
       inherit (import host) system;
       pkgs = nixpkgs.legacyPackages.${system};
 
-      inherit (pkgs.lib.lists) flatten;
-
-      flatMap = fn: list: flatten (builtins.map fn list);
+      inherit (import ./lib {inherit pkgs;}) scripts utils;
 
       homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         extraSpecialArgs = {
           inherit (self) inputs;
+          inherit scripts utils;
         };
 
         modules =
@@ -49,7 +48,7 @@
 
       secrets = homeManagerConfiguration.config.sops.secrets;
       devShell = let
-        importEach = flatMap (module:
+        importEach = utils.flatMap (module:
           import module {
             inherit secrets;
             inherit pkgs;

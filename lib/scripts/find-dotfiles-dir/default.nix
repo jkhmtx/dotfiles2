@@ -1,14 +1,20 @@
-{pkgs, ...}:
+{
+  consts,
+  pkgs,
+  ...
+}:
 pkgs.writeShellApplication
 {
-  name = "hm";
+  name = "find-dotfiles-dir";
 
   runtimeInputs = [
     pkgs.coreutils
     pkgs.findutils
-    pkgs.home-manager
-    pkgs.jq
   ];
+
+  runtimeEnv = {
+    FLAKE_INFO = consts.flakeInfo;
+  };
 
   text = builtins.readFile ./main.sh;
 }

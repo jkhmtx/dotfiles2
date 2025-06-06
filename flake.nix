@@ -67,16 +67,17 @@
     };
 
     personal = config ./hosts/nixos.nix [
+      ./audio/daw.nix
       ./dev/direnv
       ./dev/git
       ./dev/github
       ./dev/nvim
+      ./borg
       ./home-manager
       ./secrets
       ./shell
       ./term
       ./tmux
-      ./borg
     ];
     work = config ./hosts/SB-US-B0E2-jhamilton.nix [
       ./dev/direnv

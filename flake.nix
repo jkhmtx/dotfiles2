@@ -72,7 +72,6 @@
       ./dev/github
       ./dev/nvim
       ./home-manager
-      ./nix
       ./secrets
       ./shell
       ./term
@@ -85,7 +84,6 @@
       ./dev/github
       ./dev/nvim
       ./home-manager
-      ./nix
       ./secrets
       ./shell
       ./term

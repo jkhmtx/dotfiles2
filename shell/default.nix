@@ -9,6 +9,7 @@ in {
     home.packages = [
       fzf
       pkgs.jq
+      pkgs.nix-search-cli
       pkgs.ripgrep
       pkgs.tree
       pkgs.xclip

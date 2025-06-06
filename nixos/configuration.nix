@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./networking
     ./ssh
+    ./games
   ];
 
   # Bootloader.

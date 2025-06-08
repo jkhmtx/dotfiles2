@@ -127,8 +127,7 @@ in {
           ];
 
           javascript = with pkgs.vimPlugins; [
-            nvim-lspconfig
-            typescript-tools-nvim
+            pkgs.vtsls
           ];
 
           markdown = with pkgs.vimPlugins; [

@@ -44,7 +44,14 @@ require("lze").load({
 	}),
 	lsp_config({
 		"my.lsp.javascript",
-		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+		ft = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+		},
 	}),
 	lsp_config({
 		"my.lsp.jq",

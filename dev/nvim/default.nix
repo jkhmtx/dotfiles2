@@ -52,6 +52,7 @@ in {
             biome
             nodePackages.eslint
             nodePackages.prettier
+            vtsls
           ];
 
           jq = [
@@ -127,8 +128,6 @@ in {
           ];
 
           javascript = with pkgs.vimPlugins; [
-            nvim-lspconfig
-            typescript-tools-nvim
           ];
 
           markdown = with pkgs.vimPlugins; [

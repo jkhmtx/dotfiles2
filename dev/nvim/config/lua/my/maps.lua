@@ -57,14 +57,26 @@ vim.keymap.set("n", "N", "Nzz", { desc = "Keep the cursor in the middle when sea
 vim.keymap.set("n", "G", "Gzz", { desc = "Keep the cursor in the middle when going to the bottom of the file" })
 
 -- Buffers
-vim.keymap.set("n", "H", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "H", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bl", "<cmd>b#<CR>", { desc = "Last buffer" })
+vim.keymap.set("n", "<leader>bl", "<cmd>buffer#<CR>", { desc = "Last buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "delete buffer" })
+vim.keymap.set("n", "<leader>bo", function()
+	vim.cmd("%bdelete")
+	vim.cmd("edit#")
+end, { desc = "delete all other buffers" })
+vim.keymap.set("n", "<leader>br", function()
+	vim.cmd("edit! %")
+	vim.notify("Buffer reloaded")
+end, { desc = "Reload current buffer" })
 
 -- Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -75,5 +87,4 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate window down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate window up" })
 
 -- LSP
-
 vim.keymap.set("n", "<leader>lr", require("my.lsp.lib").buf_restart_clients, { desc = "(L)sp (R)estart" })

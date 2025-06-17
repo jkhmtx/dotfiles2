@@ -5,11 +5,11 @@
   imports = [
     ./browser
     ./display
-    # Include the results of the hardware scan.
+    ./games
     ./hardware-configuration.nix
     ./networking
+    ./password-manager
     ./ssh
-    ./games
   ];
 
   # Bootloader.

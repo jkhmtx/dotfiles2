@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./hyprland.nix
-    ./x11.nix
+    ./plasma5.nix
   ];
 
   services.displayManager.autoLogin.enable = true;

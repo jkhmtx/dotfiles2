@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {pkgs, ...}: {
   imports = [
+    ./browser
     ./display
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -70,9 +71,6 @@
 
   programs.zsh.enable = true;
   users.users.jakeh.shell = pkgs.zsh;
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

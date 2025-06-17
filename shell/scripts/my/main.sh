@@ -48,7 +48,7 @@ machine)
     NIXOS_CONFIG=${dotfiles_dir}/nixos/configuration.nix
 
     if test -s "${NIXOS_CONFIG}"; then
-      NIXOS_CONFIG="${NIXOS_CONFIG}" sudo nixos-rebuild "${@}"
+      sudo nixos-rebuild -I nixos-config="${NIXOS_CONFIG}" "${@}"
     else
       echo "Invalid NIXOS_CONFIG: ${NIXOS_CONFIG}"
       exit 1

@@ -1,7 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{pkgs, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   imports = [
     ./audio
     ./browser
@@ -18,12 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use flakes
-  nix = {
-    package = pkgs.nixVersions.stable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -49,17 +48,14 @@
   services.printing.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jakeh = {
+  users.users.${user.name} = {
     isNormalUser = true;
-    description = "Jake Hamilton";
+    description = user.description;
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
   };
 
   programs.zsh.enable = true;
-  users.users.jakeh.shell = pkgs.zsh;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

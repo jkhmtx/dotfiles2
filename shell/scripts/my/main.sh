@@ -15,18 +15,7 @@ dotfiles | home)
     ;;
   s | switch)
     shift
-
-    case "${1:-}" in
-    nixos | work)
-      config="${1}"
-      shift
-      ;;
-    *)
-      echo "Must specify one of: [nixos|work]"
-      ;;
-    esac
-
-    home-manager switch --flake "${dotfiles_dir}#${config}" "${@}"
+    home-manager switch --flake "${dotfiles_dir}#$(hostname)" "${@}"
 
     record-home-manager-flake-metadata "${dotfiles_dir}"
     ;;
@@ -45,14 +34,7 @@ machine)
   rebuild)
     shift
 
-    NIXOS_CONFIG=${dotfiles_dir}/nixos/configuration.nix
-
-    if test -s "${NIXOS_CONFIG}"; then
-      sudo nixos-rebuild -I nixos-config="${NIXOS_CONFIG}" "${@}"
-    else
-      echo "Invalid NIXOS_CONFIG: ${NIXOS_CONFIG}"
-      exit 1
-    fi
+    sudo nixos-rebuild "${@}" --flake "${dotfiles_dir}"
     ;;
   *)
     echo "Must specify one of: [edit|e|rebuild]"

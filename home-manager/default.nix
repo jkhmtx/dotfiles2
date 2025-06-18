@@ -1,5 +1,12 @@
-{...}: {
+{
+  user,
+  homeDirectory,
+  ...
+}: {
   config = {
+    home.username = user.name;
+    home.homeDirectory = user.home;
+
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 

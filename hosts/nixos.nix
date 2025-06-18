@@ -1,16 +1,29 @@
 {
   system = "x86_64-linux";
-  module = {pkgs, ...}: let
-    unfreePnames = import ../secrets/unfree.nix {};
+  user = {
+    name = "jakeh";
 
-    allowUnfreePredicate = pkgs: pkg:
-      builtins.elem (pkgs.lib.getName pkg) unfreePnames;
-  in {
-    config = {
-      home.username = "jakeh";
-      home.homeDirectory = "/home/jakeh";
-
-      nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate pkgs;
-    };
+    home = "/home/jakeh";
+    description = "Jake Hamilton";
   };
+  modules = [
+    ../audio/daw.nix
+    ../dev/direnv
+    ../dev/git
+    ../dev/github
+    ../dev/nvim
+    ../borg
+    ../home-manager
+    ../hyprland
+    ../secrets
+    ../shell
+    ../term
+    ../tmux
+  ];
+  unfree = [
+    ../secrets/unfree.nix
+    ../nixos/password-manager/unfree.nix
+    ../nixos/games/unfree.nix
+  ];
+  nixosModules = [../nixos/configuration.nix];
 }

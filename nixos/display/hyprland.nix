@@ -12,7 +12,7 @@
     environment.systemPackages = [
       # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/#cliphist
       pkgs.cliphist
-      pkgs.dolphin
+      pkgs.kdePackages.dolphin
       # https://wiki.hypr.land/Useful-Utilities/Must-have/#a-notification-daemon
       pkgs.dunst
       # https://wiki.hypr.land/Useful-Utilities/App-Launchers/#rofi-wayland-fork

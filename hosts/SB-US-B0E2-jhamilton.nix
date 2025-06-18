@@ -1,16 +1,24 @@
 {
   system = "aarch64-darwin";
-  module = {pkgs, ...}: let
-    unfreePnames = import ../secrets/unfree.nix {};
+  user = {
+    name = "jake";
 
-    allowUnfreePredicate = pkgs: pkg:
-      builtins.elem (pkgs.lib.getName pkg) unfreePnames;
-  in {
-    config = {
-      home.username = "jake";
-      home.homeDirectory = "/Users/jake";
-
-      nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate pkgs;
-    };
+    home = "/Users/jake";
+    description = null;
   };
+  modules = [
+    ../dev/direnv
+    ../dev/git
+    ../dev/github
+    ../dev/nvim
+    ../home-manager
+    ../secrets
+    ../shell
+    ../term
+    ../tmux
+  ];
+  unfree = [
+    ../secrets/unfree.nix
+  ];
+  nixosModules = [];
 }

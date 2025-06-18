@@ -12,7 +12,6 @@ in {
       pkgs.nix-search-cli
       pkgs.ripgrep
       pkgs.tree
-      pkgs.xclip
       (import ./scripts/my inputs)
     ];
 

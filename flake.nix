@@ -2,7 +2,7 @@
   description = "Home Manager configuration of jakeh";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
@@ -25,25 +25,29 @@
     home-manager,
     ...
   }: let
-    config = host: modules: let
-      inherit (import host) system;
+    mkConfiguration = {
+      system,
+      user,
+      modules,
+      unfree,
+      nixosModules,
+      ...
+    }: let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      inherit (import ./lib {inherit pkgs;}) scripts utils;
+      inherit (import ./lib {inherit pkgs;}) scripts;
+
+      utils = import ./lib/utils {inherit pkgs;};
+      specialArgs = {
+        inherit (self) inputs;
+        inherit scripts utils;
+        inherit user unfree;
+      };
 
       homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        extraSpecialArgs = {
-          inherit (self) inputs;
-          inherit scripts utils;
-        };
-
-        modules =
-          [
-            (import host).module
-          ]
-          ++ modules;
+        modules = [./unfree.nix] ++ modules;
+        extraSpecialArgs = specialArgs;
       };
 
       secrets = homeManagerConfiguration.config.sops.secrets;
@@ -61,43 +65,29 @@
             exec zsh --login
           '';
         };
+      nixosConfiguration = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit (self) inputs;
+          inherit user unfree;
+        };
+        modules = nixosModules ++ [./unfree.nix];
+      };
     in {
       inherit devShell;
       inherit homeManagerConfiguration;
+      inherit nixosConfiguration;
     };
 
-    personal = config ./hosts/nixos.nix [
-      ./audio/daw.nix
-      ./dev/direnv
-      ./dev/git
-      ./dev/github
-      ./dev/nvim
-      ./borg
-      ./home-manager
-      ./hyprland
-      ./secrets
-      ./shell
-      ./term
-      ./tmux
-    ];
-    work = config ./hosts/SB-US-B0E2-jhamilton.nix [
-      ./dev/direnv
-      ./dev/git
-      ./dev/github
-      ./dev/nvim
-      ./home-manager
-      ./secrets
-      ./shell
-      ./term
-      ./tmux
-    ];
+    personal = mkConfiguration (import ./hosts/nixos.nix);
+    work = mkConfiguration (import ./hosts/SB-US-B0E2-jhamilton.nix);
   in {
-    devShell."x86_64-linux" = personal.devShell;
-    devShell."aarch64-darwin" = work.devShell;
+    devShell.x86_64-linux = personal.devShell;
+    devShell.aarch64-darwin = work.devShell;
 
-    homeConfigurations."nixos" = personal.homeManagerConfiguration;
-    homeConfigurations."work" = work.homeManagerConfiguration;
+    homeConfigurations.nixos = personal.homeManagerConfiguration;
+    homeConfigurations.SB-US-B0E2-jhamilton = work.homeManagerConfiguration;
 
-    nixosDir = ./nixos;
+    nixosConfigurations.nixos = personal.nixosConfiguration;
   };
 }

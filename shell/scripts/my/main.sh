@@ -31,6 +31,11 @@ machine)
   edit | e)
     nvim "${dotfiles_dir}/nixos"
     ;;
+  switch)
+    shift
+
+    sudo nixos-rebuild switch --flake "${dotfiles_dir}"
+    ;;
   rebuild)
     shift
 

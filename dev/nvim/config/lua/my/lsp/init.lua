@@ -2,6 +2,20 @@
 --- @field [1] string
 --- @field ft string[]
 
+local fidget_loaded = false
+
+local load_fidget_once = function()
+	require("lze").load({
+		"fidget.nvim",
+		after = function()
+			if not fidget_loaded then
+				fidget_loaded = true
+				require("fidget").setup({})
+			end
+		end,
+	})
+end
+
 --- @param opts my.lsp.LspConfigOpts
 local lsp_config = function(opts)
 	local name = opts[1]
@@ -9,12 +23,8 @@ local lsp_config = function(opts)
 	return vim.tbl_extend("force", {
 		name,
 		before = function()
-			require("lze").load({
-				"fidget.nvim",
-				after = function()
-					require("fidget").setup({})
-				end,
-			})
+			load_fidget_once()
+
 			local lsp_modules_opts = {
 				capabilities = require("my.completions.lib").get_capabilities(),
 				filetypes = opts.ft,

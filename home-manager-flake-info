@@ -1,6 +1,6 @@
 {
   "description": "Home Manager configuration of jakeh",
-  "path": "/nix/store/bc4k588fng5lzgld9zrs55hk0sskl0n3-source",
+  "path": "/nix/store/dx5fq59qyxgb77h9avmgymxd26m3xlnq-source",
   "locks": {
     "nodes": {
       "home-manager": {

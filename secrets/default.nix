@@ -1,12 +1,12 @@
 {
-  inputs,
   pkgs,
   lib,
   config,
+  mySpecialArgs,
   ...
 } @ args: {
   imports = [
-    inputs.sops-nix.homeManagerModules.sops
+    mySpecialArgs.inputs.sops-nix.homeManagerModules.sops
   ];
 
   options = {

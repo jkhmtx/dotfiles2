@@ -1,9 +1,9 @@
 ({
   pkgs,
-  unfree,
+  mySpecialArgs,
   ...
 }: let
-  utils = import ./lib/utils {inherit pkgs;};
+  inherit (mySpecialArgs) utils unfree;
   allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) (utils.flatMap (path: import path {}) unfree);
 in {

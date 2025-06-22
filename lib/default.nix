@@ -9,8 +9,12 @@
     find-dotfiles-dir = ./scripts/find-dotfiles-dir;
     record-home-manager-flake-metadata = ./scripts/record-home-manager-flake-metadata;
   };
+  utils = {
+    flatMap = ./utils/flat-map.nix;
+  };
 
   importWithInputs = path: import path (inputs // {inherit consts;});
 in {
   scripts = mapAttrs (_: importWithInputs) scripts;
+  utils = mapAttrs (_: importWithInputs) utils;
 }

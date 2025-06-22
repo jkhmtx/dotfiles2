@@ -3,9 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
-  user,
+  mySpecialArgs,
   ...
-}: {
+}: let
+  inherit (mySpecialArgs) user;
+in {
   imports = [
     ./audio
     ./browser

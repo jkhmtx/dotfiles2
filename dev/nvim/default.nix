@@ -1,12 +1,14 @@
 {
   config,
-  inputs,
+  mySpecialArgs,
   ...
 }: let
-  utils = inputs.nixCats.utils;
+  inherit (mySpecialArgs) inputs;
+  inherit (inputs) nixCats nixpkgs;
+  inherit (nixCats) utils;
 in {
   imports = [
-    inputs.nixCats.homeModule
+    nixCats.homeModule
   ];
   config = {
     home.sessionVariables.EDITOR = "${config.nixCats.out.packages.nvim}/bin/nvim";
@@ -15,7 +17,7 @@ in {
     # it will be the namespace for your options.
     nixCats = {
       enable = true;
-      nixpkgs_version = inputs.nixpkgs;
+      nixpkgs_version = nixpkgs;
       # this will add the overlays from ./overlays and also,
       # add any plugins in inputs named "plugins-pluginName" to pkgs.neovimPlugins
       # It will not apply to overall system, just nixCats.

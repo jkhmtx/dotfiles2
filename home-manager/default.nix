@@ -1,8 +1,6 @@
-{
-  user,
-  homeDirectory,
-  ...
-}: {
+{mySpecialArgs, ...}: let
+  inherit (mySpecialArgs) user;
+in {
   config = {
     home.username = user.name;
     home.homeDirectory = user.home;

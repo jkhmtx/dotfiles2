@@ -35,13 +35,14 @@
     }: let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      inherit (import ./lib {inherit pkgs;}) scripts;
+      inherit (import ./lib {inherit pkgs;}) scripts utils;
 
-      utils = import ./lib/utils {inherit pkgs;};
       specialArgs = {
-        inherit (self) inputs;
-        inherit scripts utils;
-        inherit user unfree;
+        mySpecialArgs = {
+          inherit (self) inputs;
+          inherit scripts utils;
+          inherit user unfree;
+        };
       };
 
       homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
@@ -67,10 +68,7 @@
         };
       nixosConfiguration = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit (self) inputs;
-          inherit user unfree;
-        };
+        inherit specialArgs;
         modules = nixosModules ++ [./unfree.nix];
       };
     in {

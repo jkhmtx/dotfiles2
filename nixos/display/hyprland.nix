@@ -15,6 +15,9 @@
       pkgs.kdePackages.dolphin
       # https://wiki.hypr.land/Useful-Utilities/Must-have/#a-notification-daemon
       pkgs.dunst
+      pkgs.hypridle
+      # notify-send
+      pkgs.libnotify
       # https://wiki.hypr.land/Useful-Utilities/App-Launchers/#rofi-wayland-fork
       pkgs.rofi
       # https://wiki.hypr.land/Useful-Utilities/Status-Bars/#waybar

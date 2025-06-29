@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 eval "$(op signin)"
 
@@ -11,4 +11,4 @@ mkdir -p "${SOPS_AGE_DIR}"
 ssh-to-age -private-key -i "${SSH_KEY_PATH}" -o "${SOPS_AGE_DIR}/keys.txt"
 
 >&2 echo "Age recipient:"
-cat "${SSH_KEY_PATH}.pub" | ssh-to-age
+ssh-to-age -i "${SSH_KEY_PATH}.pub"

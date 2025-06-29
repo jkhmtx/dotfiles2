@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   system = "x86_64-linux";
   user = {
     name = "jakeh";
@@ -15,15 +15,20 @@
     ../borg
     ../home-manager
     ../hypr
-    ../secrets
+    ../secrets/home-manager.nix
     ../shell
     ../term
     ../tmux
+    inputs.sops-nix.homeManagerModules.sops
   ];
   unfree = [
-    ../secrets/unfree.nix
+    ../secrets/scripts/find-age-recipient/unfree.nix
     ../nixos/password-manager/unfree.nix
     ../nixos/games/unfree.nix
   ];
-  nixosModules = [../nixos/configuration.nix];
+  nixosModules = [
+    ../nixos/configuration.nix
+    ../secrets
+    inputs.sops-nix.nixosModules.sops
+  ];
 }

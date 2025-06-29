@@ -25,6 +25,7 @@
     home-manager,
     ...
   }: let
+    inherit (self) inputs;
     mkConfiguration = {
       system,
       user,
@@ -39,7 +40,7 @@
 
       specialArgs = {
         mySpecialArgs = {
-          inherit (self) inputs;
+          inherit inputs;
           inherit scripts utils;
           inherit user unfree;
         };
@@ -77,8 +78,8 @@
       inherit nixosConfiguration;
     };
 
-    personal = mkConfiguration (import ./hosts/nixos.nix);
-    work = mkConfiguration (import ./hosts/SB-US-B0E2-jhamilton.nix);
+    personal = mkConfiguration (import ./hosts/nixos.nix {inherit inputs;});
+    work = mkConfiguration (import ./hosts/SB-US-B0E2-jhamilton.nix {inherit inputs;});
   in {
     devShell.x86_64-linux = personal.devShell;
     devShell.aarch64-darwin = work.devShell;

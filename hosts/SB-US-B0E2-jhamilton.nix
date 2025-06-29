@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   system = "aarch64-darwin";
   user = {
     name = "jake";
@@ -12,13 +12,14 @@
     ../dev/github
     ../dev/nvim
     ../home-manager
-    ../secrets
+    ../secrets/home-manager.nix
     ../shell
     ../term
     ../tmux
+    inputs.sops-nix.homeManagerModules.sops
   ];
   unfree = [
-    ../secrets/unfree.nix
+    ../secrets/scripts/find-age-recipient/unfree.nix
   ];
   nixosModules = [];
 }

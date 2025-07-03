@@ -12,6 +12,7 @@ in {
     ./audio
     ./browser
     ./display
+    ./fonts
     ./games
     ./hardware-configuration.nix
     ./networking

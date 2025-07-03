@@ -1,6 +1,7 @@
 {mySpecialArgs, ...}: let
   inherit (mySpecialArgs) user;
 in {
+  imports = [./fonts.nix];
   config = {
     home.username = user.name;
     home.homeDirectory = user.home;

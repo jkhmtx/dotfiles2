@@ -10,6 +10,7 @@
     };
 
     environment.systemPackages = [
+      pkgs.wl-clipboard
       # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/#cliphist
       pkgs.cliphist
       pkgs.kdePackages.dolphin

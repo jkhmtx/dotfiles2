@@ -1,6 +1,6 @@
 {
-  "description": "Home Manager configuration of jakeh",
-  "path": "/nix/store/8h47c8x2hr10q9vhb54vhcgy9jbvdnkz-source",
+  "description": "jkhmtx's HM",
+  "path": "/nix/store/vxdyapw6z5dq0w3z9qwidkzawswhmy4k-source",
   "locks": {
     "nodes": {
       "home-manager": {
@@ -10,11 +10,11 @@
           ]
         },
         "locked": {
-          "lastModified": 1751500614,
-          "narHash": "sha256-mYiYNsTJkbQouC5YHOTgqVpjpELoNf9f4z5ZeY4NfPg=",
+          "lastModified": 1752202894,
+          "narHash": "sha256-knafgng4gCjZIUMyAEWjxxdols6n/swkYnbWr+oF+1w=",
           "owner": "nix-community",
           "repo": "home-manager",
-          "rev": "a5b56720841121d2189c011e445c4be4c943bab5",
+          "rev": "fab659b346c0d4252208434c3c4b3983a4b38fec",
           "type": "github"
         },
         "original": {
@@ -23,13 +23,34 @@
           "type": "github"
         }
       },
+      "hyprlang-fmt": {
+        "inputs": {
+          "nixpkgs": [
+            "nixpkgs"
+          ],
+          "rust-overlay": "rust-overlay"
+        },
+        "locked": {
+          "lastModified": 1752209317,
+          "narHash": "sha256-OBJT947PsoNqpHCu4cbTCj6jB6xyE+zhnCecZnJ9ZS4=",
+          "owner": "jkhmtx",
+          "repo": "hyprlang-fmt",
+          "rev": "908853420ded8a1ad029efaa5b2311c02c329275",
+          "type": "github"
+        },
+        "original": {
+          "owner": "jkhmtx",
+          "repo": "hyprlang-fmt",
+          "type": "github"
+        }
+      },
       "nixCats": {
         "locked": {
-          "lastModified": 1750385661,
-          "narHash": "sha256-JpIEf5IrOzMTjowkxB6kgh4AK3Dp9i/T9G4w2ZiKMgQ=",
+          "lastModified": 1751874031,
+          "narHash": "sha256-Bj8RGeMMNT4MThQJaKjML123kTXiKtTPsXWC2ieaiDc=",
           "owner": "BirdeeHub",
           "repo": "nixCats-nvim",
-          "rev": "04379fef2fbd4c9d8f4c9a6203cef135ab0b1acd",
+          "rev": "a985eb3e7d30d3f9c9cf7e8a8718d2d10126bcbd",
           "type": "github"
         },
         "original": {
@@ -40,11 +61,11 @@
       },
       "nixpkgs": {
         "locked": {
-          "lastModified": 1751271578,
-          "narHash": "sha256-P/SQmKDu06x8yv7i0s8bvnnuJYkxVGBWLWHaU+tt4YY=",
+          "lastModified": 1751984180,
+          "narHash": "sha256-LwWRsENAZJKUdD3SpLluwDmdXY9F45ZEgCb0X+xgOL0=",
           "owner": "nixos",
           "repo": "nixpkgs",
-          "rev": "3016b4b15d13f3089db8a41ef937b13a9e33a8df",
+          "rev": "9807714d6944a957c2e036f84b0ff8caf9930bc0",
           "type": "github"
         },
         "original": {
@@ -57,9 +78,31 @@
       "root": {
         "inputs": {
           "home-manager": "home-manager",
+          "hyprlang-fmt": "hyprlang-fmt",
           "nixCats": "nixCats",
           "nixpkgs": "nixpkgs",
           "sops-nix": "sops-nix"
+        }
+      },
+      "rust-overlay": {
+        "inputs": {
+          "nixpkgs": [
+            "hyprlang-fmt",
+            "nixpkgs"
+          ]
+        },
+        "locked": {
+          "lastModified": 1751510438,
+          "narHash": "sha256-m8PjOoyyCR4nhqtHEBP1tB/jF+gJYYguSZmUmVTEAQE=",
+          "owner": "oxalica",
+          "repo": "rust-overlay",
+          "rev": "7f415261f298656f8164bd636c0dc05af4e95b6b",
+          "type": "github"
+        },
+        "original": {
+          "owner": "oxalica",
+          "repo": "rust-overlay",
+          "type": "github"
         }
       },
       "sops-nix": {
@@ -69,11 +112,11 @@
           ]
         },
         "locked": {
-          "lastModified": 1750119275,
-          "narHash": "sha256-Rr7Pooz9zQbhdVxux16h7URa6mA80Pb/G07T4lHvh0M=",
+          "lastModified": 1751606940,
+          "narHash": "sha256-KrDPXobG7DFKTOteqdSVeL1bMVitDcy7otpVZWDE6MA=",
           "owner": "Mic92",
           "repo": "sops-nix",
-          "rev": "77c423a03b9b2b79709ea2cb63336312e78b72e2",
+          "rev": "3633fc4acf03f43b260244d94c71e9e14a2f6e0d",
           "type": "github"
         },
         "original": {

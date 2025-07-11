@@ -1,11 +1,14 @@
 {
+  pkgs,
   config,
   mySpecialArgs,
   ...
 }: let
-  inherit (mySpecialArgs) inputs;
+  inherit (mySpecialArgs) inputs system;
   inherit (inputs) nixCats nixpkgs;
   inherit (nixCats) utils;
+
+  hyprlang-fmt = inputs.hyprlang-fmt.packages."${system}".default;
 in {
   imports = [
     nixCats.homeModule
@@ -49,6 +52,13 @@ in {
             fd
             stdenv.cc.cc
           ];
+
+          hyprlang =
+            if stdenv.isLinux
+            then [
+              hyprlang-fmt
+            ]
+            else [];
 
           javascript = [
             biome
@@ -203,6 +213,7 @@ in {
             themer = true;
 
             # Languages
+            hyprlang = pkgs.stdenv.isLinux;
             lua = true;
             markdown = true;
             nix = true;

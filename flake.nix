@@ -1,11 +1,16 @@
 {
-  description = "Home Manager configuration of jakeh";
+  description = "jkhmtx's HM";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
+    };
+
+    hyprlang-fmt = {
+      url = "github:jkhmtx/hyprlang-fmt";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
@@ -26,6 +31,7 @@
     ...
   }: let
     inherit (self) inputs;
+
     mkConfiguration = {
       system,
       user,
@@ -40,6 +46,7 @@
 
       specialArgs = {
         mySpecialArgs = {
+          inherit system;
           inherit inputs;
           inherit scripts utils;
           inherit user unfree;

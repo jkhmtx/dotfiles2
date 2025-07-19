@@ -3,17 +3,17 @@
   mySpecialArgs,
   ...
 }: let
-  inherit (mySpecialArgs) scripts;
+  inherit (mySpecialArgs) lib;
 in
   pkgs.writeShellApplication
   {
     name = "my";
 
     runtimeInputs = [
+      lib.scripts.record-home-manager-flake-metadata
+      lib.scripts.find-dotfiles-dir
       pkgs.hostname
       pkgs.home-manager
-      scripts.record-home-manager-flake-metadata
-      scripts.find-dotfiles-dir
     ];
 
     text = builtins.readFile ./main.sh;

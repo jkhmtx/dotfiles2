@@ -1,11 +1,14 @@
-{inputs, ...}: {
-  system = "x86_64-linux";
+{inputs, ...}: let
   user = {
     name = "jakeh";
 
     home = "/home/jakeh";
     description = "Jake Hamilton";
   };
+in {
+  system = "x86_64-linux";
+  inherit user;
+  repoPath = "${user.home}/projects/dotfiles";
   modules = [
     ../audio/daw.nix
     ../dev/direnv

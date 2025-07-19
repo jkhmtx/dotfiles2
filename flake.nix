@@ -38,18 +38,20 @@
       modules,
       unfree,
       nixosModules,
+      repoPath,
       ...
     }: let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      inherit (import ./lib {inherit pkgs;}) scripts utils;
+      lib = import ./lib ({inherit pkgs;} // specialArgs);
 
       specialArgs = {
         mySpecialArgs = {
+          rootPath = toString self;
           inherit system;
           inherit inputs;
-          inherit scripts utils;
-          inherit user unfree;
+          inherit lib;
+          inherit user unfree repoPath;
         };
       };
 
@@ -61,7 +63,7 @@
 
       secrets = homeManagerConfiguration.config.sops.secrets;
       devShell = let
-        importEach = utils.flatMap (module:
+        importEach = lib.utils.flatMap (module:
           import module {
             inherit secrets;
             inherit pkgs;

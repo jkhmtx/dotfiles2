@@ -1,11 +1,15 @@
-{inputs, ...}: {
-  system = "aarch64-darwin";
+{inputs, ...}: let
   user = {
     name = "jake";
 
     home = "/Users/jake";
     description = null;
   };
+in {
+  system = "aarch64-darwin";
+  hostKind = "work";
+  inherit user;
+  repoPath = "${user.home}/dotfiles2";
   modules = [
     ../dev/direnv
     ../dev/git

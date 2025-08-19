@@ -7,6 +7,7 @@
   };
 in {
   system = "x86_64-linux";
+  hostKind = "personal";
   inherit user;
   repoPath = "${user.home}/projects/dotfiles";
   modules = [

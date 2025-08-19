@@ -33,12 +33,13 @@
     inherit (self) inputs;
 
     mkConfiguration = {
-      system,
-      user,
+      hostKind,
       modules,
-      unfree,
       nixosModules,
       repoPath,
+      system,
+      unfree,
+      user,
       ...
     }: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -51,7 +52,7 @@
           inherit system;
           inherit inputs;
           inherit lib;
-          inherit user unfree repoPath;
+          inherit user unfree repoPath hostKind;
         };
       };
 

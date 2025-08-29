@@ -49,6 +49,10 @@ require("lze").load({
 		ft = { "nix" },
 	}),
 	lsp_config({
+		"my.lsp.rust",
+		ft = { "rust" },
+	}),
+	lsp_config({
 		"my.lsp.terraform",
 		ft = { "terraform", "terraform-vars" },
 	}),

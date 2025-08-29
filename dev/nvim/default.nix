@@ -82,6 +82,10 @@ in {
             nixd
           ];
 
+          rust = [
+            rust-analyzer
+          ];
+
           shell = [
             bash-language-server
             shellcheck
@@ -221,6 +225,7 @@ in {
             lua = true;
             markdown = true;
             nix = true;
+            rust = true;
             shell = true;
             terraform = true;
             toml = true;

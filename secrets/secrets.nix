@@ -16,6 +16,8 @@ in {
       defaultSopsFile = ./secrets.yaml;
       secrets.githubToken = {};
       secrets.home-wifi-password = {};
+      secrets.master-gpg-secret-key = {};
+      secrets.master-gpg-public-key = {};
     };
   };
 }

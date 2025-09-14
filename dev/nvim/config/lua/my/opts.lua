@@ -50,6 +50,7 @@ o.undodir = state_dir .. "/undo"
 -- Config
 o.exrc = true
 o.colorcolumn = "120"
+o.autoread = true
 
 -- Indentation/Sign-column numbers
 vim.wo.signcolumn = "yes"

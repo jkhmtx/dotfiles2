@@ -14,8 +14,17 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-amd" "acpi_call"];
+  boot.kernelParams = [
+    "nvidia.NVreg_UsePageAttributeTable=1"
+    "video=DP-2:D" # https://docs.kernel.org/fb/modedb.html
+    "video=DP-3:D"
+  ];
+  boot.extraModulePackages = [config.boot.kernelPackages.acpi_call];
+
+  boot.blacklistedKernelModules = [
+    "nouveau"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/92cdd5e3-8e71-4b50-b912-e8b9d42e315d";

@@ -29,6 +29,7 @@ in {
     ../secrets/scripts/find-age-recipient/unfree.nix
     ../nixos/password-manager/unfree.nix
     ../nixos/games/unfree.nix
+    ../nixos/display/unfree.nix
   ];
   nixosModules = [
     ../nixos/configuration.nix

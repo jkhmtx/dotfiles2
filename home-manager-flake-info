@@ -1,6 +1,6 @@
 {
   "description": "jkhmtx's HM",
-  "path": "/nix/store/k6vdyavwy3cz7ghamnnqdd8r6v6ayjcv-source",
+  "path": "/nix/store/84xg5qnxby2m8blar7xzzv8l2ai0pmjd-source",
   "locks": {
     "nodes": {
       "home-manager": {
@@ -10,11 +10,11 @@
           ]
         },
         "locked": {
-          "lastModified": 1755625756,
-          "narHash": "sha256-t57ayMEdV9g1aCfHzoQjHj1Fh3LDeyblceADm2hsLHM=",
+          "lastModified": 1756496801,
+          "narHash": "sha256-IYIsnPy+cJxe8RbDHBrCtfJY0ry2bG2H7WvMcewiGS8=",
           "owner": "nix-community",
           "repo": "home-manager",
-          "rev": "dd026d86420781e84d0732f2fa28e1c051117b59",
+          "rev": "77a71380c38fb2a440b4b5881bbc839f6230e1cb",
           "type": "github"
         },
         "original": {
@@ -46,11 +46,11 @@
       },
       "nixCats": {
         "locked": {
-          "lastModified": 1755491370,
-          "narHash": "sha256-i1sI9zxcygXP7ExtjqEz06jAobk9FWiYgbeimwn5Owc=",
+          "lastModified": 1756094250,
+          "narHash": "sha256-Bkghd2NdQqQfKwSftABMDjnfRMFTJXA/XvvfKVonV/Q=",
           "owner": "BirdeeHub",
           "repo": "nixCats-nvim",
-          "rev": "a526813d8026d7a2a8a40a5d89eb76cf89d63169",
+          "rev": "7496b06144a15e44301aacea31c3e1ccdb81546e",
           "type": "github"
         },
         "original": {
@@ -61,11 +61,11 @@
       },
       "nixpkgs": {
         "locked": {
-          "lastModified": 1755186698,
-          "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
+          "lastModified": 1756386758,
+          "narHash": "sha256-1wxxznpW2CKvI9VdniaUnTT2Os6rdRJcRUf65ZK9OtE=",
           "owner": "nixos",
           "repo": "nixpkgs",
-          "rev": "fbcf476f790d8a217c3eab4e12033dc4a0f6d23c",
+          "rev": "dfb2f12e899db4876308eba6d93455ab7da304cd",
           "type": "github"
         },
         "original": {

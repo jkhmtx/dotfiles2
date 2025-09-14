@@ -10,6 +10,7 @@ in {
       fzf
       pkgs.jq
       pkgs.nix-search-cli
+      pkgs.psmisc
       pkgs.ripgrep
       pkgs.tree
       (import ./scripts/my inputs)

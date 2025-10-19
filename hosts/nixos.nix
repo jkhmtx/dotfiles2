@@ -11,6 +11,7 @@ in {
   inherit user;
   repoPath = "${user.home}/projects/dotfiles";
   modules = [
+    ../audio/composition.nix
     ../audio/daw.nix
     ../dev/direnv
     ../dev/git

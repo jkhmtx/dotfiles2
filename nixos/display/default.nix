@@ -2,6 +2,7 @@
   imports = [
     ./hyprland.nix
     ./plasma5.nix
+    ./screenshot.nix
   ];
 
   services.displayManager.autoLogin.enable = true;

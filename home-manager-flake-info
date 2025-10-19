@@ -1,6 +1,6 @@
 {
   "description": "jkhmtx's HM",
-  "path": "/nix/store/pcr9frnxavm346i5i5wywyv7w2chq01x-source",
+  "path": "/nix/store/bi75xcy0j5xm945l4nq2k12rcga6pdzy-source",
   "locks": {
     "nodes": {
       "home-manager": {

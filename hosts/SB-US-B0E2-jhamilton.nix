@@ -15,6 +15,7 @@ in {
     ../dev/git
     ../dev/github
     ../dev/nvim
+    ../dev/ssh
     ../home-manager
     ../secrets/home-manager.nix
     ../shell

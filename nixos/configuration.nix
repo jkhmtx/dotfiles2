@@ -17,7 +17,6 @@ in {
     ./hardware-configuration.nix
     ./networking
     ./password-manager
-    ./ssh
   ];
 
   # Bootloader.

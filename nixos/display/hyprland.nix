@@ -32,6 +32,7 @@
       (pkgs.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
+      pkgs.swayimg
     ];
 
     xdg.portal.enable = true;

@@ -17,6 +17,7 @@ in {
     ../dev/git
     ../dev/github
     ../dev/nvim
+    ../dev/ssh
     ../borg
     ../home-manager
     ../hypr

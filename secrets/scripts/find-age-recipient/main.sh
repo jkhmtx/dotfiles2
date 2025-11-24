@@ -2,7 +2,7 @@
 
 eval "$(op signin)"
 
-SSH_KEY_PATH="${HOME}/.ssh/id_ed25519"
+SSH_KEY_PATH="${HOME}/.ssh/id_ed25519-age"
 op read "op://private/nixos/private key" >"${SSH_KEY_PATH}"
 op read "op://private/nixos/public key" >"${SSH_KEY_PATH}.pub"
 

@@ -1,0 +1,5 @@
+Host ssh.jkhmtx.com
+  ProxyCommand @cloudflared@ access ssh --hostname %h
+  IdentityFile @identityFile@
+  User jakeh
+  Port @port@

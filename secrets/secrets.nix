@@ -18,6 +18,10 @@ in {
       secrets.home-wifi-password = {};
       secrets.master-gpg-secret-key = {};
       secrets.master-gpg-public-key = {};
+      secrets.cloudflared = {};
+      secrets.ssh-private-key = {
+        path = "~/.ssh/id_ed25519";
+      };
     };
   };
 }

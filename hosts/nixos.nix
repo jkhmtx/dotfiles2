@@ -23,6 +23,7 @@ in {
     ../hypr
     ../secrets/home-manager.nix
     ../shell
+    ../shell/linux.nix
     ../term
     ../tmux
     inputs.sops-nix.homeManagerModules.sops

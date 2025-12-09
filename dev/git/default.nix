@@ -7,8 +7,10 @@
     programs.git = {
       enable = true;
 
-      userEmail = "jakehamtexas@gmail.com";
-      userName = "Jake Hamilton";
+      settings.user = {
+        email = "jakehamtexas@gmail.com";
+        name = "Jake Hamilton";
+      };
 
       ignores = [
         "*~"

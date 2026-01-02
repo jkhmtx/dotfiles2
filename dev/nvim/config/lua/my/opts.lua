@@ -73,7 +73,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Case insensitive searching UNLESS /C or capital letter is in search
 o.ignorecase = true
 o.smartcase = true
-o.completeopt = "menuone,noselect,preview,noinsert"
+o.completeopt = "menu,menuone,noselect,popup,noinsert"
 
 -- Tabs
 o.expandtab = true

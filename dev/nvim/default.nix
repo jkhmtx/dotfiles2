@@ -178,10 +178,6 @@ in {
               #   indent-blankline-nvim
               #   vim-startuptime
             ];
-
-            aiEvenThoughIDontWantTo = with pkgs.vimPlugins; [
-              augment-vim
-            ];
           };
         };
         # shared libraries to be added to LD_LIBRARY_PATH
@@ -235,9 +231,6 @@ in {
             # Concerns
             lint = true;
             format = true;
-
-            # Concerns :/
-            aiEvenThoughIDontWantTo = mySpecialArgs.hostKind == "work";
           };
         };
       };

@@ -16,6 +16,8 @@ local load_fidget_once = function()
 	})
 end
 
+local capabilities = require("my.completions.lib").get_capabilities()
+
 --- @param opts my.lsp.LspConfigOpts
 local lsp_config = function(opts)
 	local name = opts[1]
@@ -26,7 +28,7 @@ local lsp_config = function(opts)
 			load_fidget_once()
 
 			local lsp_modules_opts = {
-				capabilities = require("my.completions.lib").get_capabilities(),
+				capabilities = capabilities,
 				filetypes = opts.ft,
 			}
 
@@ -71,13 +73,4 @@ require("lze").load({
 		"my.lsp.jq",
 		ft = { "jq" },
 	}),
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client and client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-		end
-	end,
 })

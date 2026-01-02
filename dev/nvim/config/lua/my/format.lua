@@ -10,6 +10,7 @@ local formatters_by_ft = {
 	tf = terraform,
 	["terraform-vars"] = terraform,
 	hyprlang = { "hyprlang-fmt" },
+	rust = { "rustfmt" },
 
 	javascript = prettier,
 	typescript = prettier,

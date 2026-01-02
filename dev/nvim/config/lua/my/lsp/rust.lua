@@ -22,7 +22,13 @@ return function(opts)
 		end,
 		filetypes = opts.filetypes,
 		root_markers = { "Cargo.lock", "Cargo.toml", ".git" },
-		settings = {},
+		settings = {
+			["rust-analyzer"] = {
+				check = {
+					command = "clippy",
+				},
+			},
+		},
 		capabilities = opts.capabilities or nil,
 	}
 

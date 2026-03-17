@@ -114,6 +114,7 @@ in {
               nvim-surround
               oil-nvim
               plenary-nvim
+              trouble-nvim
               vim-sleuth
               vim-tmux-navigator
               undotree

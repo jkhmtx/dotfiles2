@@ -29,10 +29,10 @@ in {
     inputs.sops-nix.homeManagerModules.sops
   ];
   unfree = [
-    ../secrets/scripts/find-age-recipient/unfree.nix
-    ../nixos/password-manager/unfree.nix
-    ../nixos/games/unfree.nix
     ../nixos/display/unfree.nix
+    ../nixos/games/unfree.nix
+    ../nixos/password-manager/unfree.nix
+    ../secrets/scripts/find-age-recipient/unfree.nix
   ];
   nixosModules = [
     ../nixos/configuration.nix

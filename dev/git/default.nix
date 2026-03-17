@@ -12,6 +12,8 @@
         name = "Jake Hamilton";
       };
 
+      signing.format = "ssh";
+
       ignores = [
         "*~"
         "*.swp"

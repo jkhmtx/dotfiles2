@@ -13,6 +13,7 @@ in {
       pkgs.ripgrep
       pkgs.tree
       (import ./scripts/my inputs)
+      (import ./scripts/tmux-session-find inputs)
     ];
 
     home.file = {

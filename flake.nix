@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
     };
@@ -42,7 +47,10 @@
       user,
       ...
     }: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [inputs.fenix.overlays.default];
+      };
 
       lib = import ./lib ({inherit pkgs;} // specialArgs);
 

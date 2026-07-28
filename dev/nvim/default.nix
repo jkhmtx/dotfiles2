@@ -9,6 +9,7 @@
   inherit (nixCats) utils;
 
   hyprlang-fmt = inputs.hyprlang-fmt.packages."${system}".default;
+  rustToolchain = import ../rust/toolchain.nix pkgs;
 in {
   imports = [
     nixCats.homeModule
@@ -83,7 +84,7 @@ in {
           ];
 
           rust = [
-            rust-analyzer
+            rustToolchain
           ];
 
           shell = [

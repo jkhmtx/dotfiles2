@@ -13,6 +13,10 @@ in {
       pkgs.ripgrep
       pkgs.tree
       (import ./scripts/my inputs)
+      (import ./scripts/pr/approve inputs)
+      (import ./scripts/pr/extract inputs)
+      (import ./scripts/pr/list inputs)
+      (import ./scripts/pr/sync inputs)
       (import ./scripts/tmux-session-find inputs)
     ];
 

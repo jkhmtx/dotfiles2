@@ -10,8 +10,10 @@ in
     name = "tmux-session-find";
 
     runtimeInputs = [
+      pkgs.bat
       pkgs.fzf
       pkgs.tmux
+      pkgs.parallel
     ];
 
     text = builtins.readFile ./main.sh;

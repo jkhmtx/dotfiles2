@@ -1,28 +1,25 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 set -euo pipefail
 
-sessions=/tmp/tmux-sessions
+tmux ls -F '#{session_name}:#{pane_current_path}' >/tmp/tmux-sessions.raw
 
-while read -r line; do
-  session="$(cut -d':' -f1 <<<"${line}")"
-  path="$(cut -d':' -f2 <<<"${line}")"
-  branch="$(git -C "${path}" rev-parse --abbrev-ref HEAD || echo "no git")"
+mapfile -t lines </tmp/tmux-sessions.raw
 
-  str="${session}: "
-  if test -n "${branch:-}"; then
-    str+="[${branch}] "
-  fi
+for line in "${lines[@]}"; do
+  session="${line%:*}"
+  path="${line#*:}"
 
-  str+="${path}"
+  echo "${session},${path}"
+done >/tmp/tmux-sessions
 
-  echo "${str}"
-
-done \
-  <<<"$(tmux ls -F '#{session_name}:#{pane_current_path}')" |
-  sort \
-    >"${sessions}"
-
-tmux display-popup -E 'fzf --tac <'"${sessions}"' |
-  cut -d':' -f1 |
-  xargs tmux switch-client -t'
+tmux display-popup \
+  -w 80% \
+  -h 60% \
+  -E "fzf \
+  --delimiter , \
+  --with-nth '[{1}]: {2}' \
+  --preview 'git -C {2} log --oneline --color=always --decorate | $(which bat)' \
+  --accept-nth 1 \
+  </tmp/tmux-sessions |
+  xargs tmux switch-client -t"

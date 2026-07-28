@@ -10,7 +10,6 @@ in
     name = "my";
 
     runtimeInputs = [
-      lib.scripts.record-home-manager-flake-metadata
       lib.scripts.find-dotfiles-dir
       pkgs.hostname
       pkgs.home-manager

@@ -16,7 +16,6 @@
 
   scripts = {
     find-dotfiles-dir = ./scripts/find-dotfiles-dir;
-    record-home-manager-flake-metadata = ./scripts/record-home-manager-flake-metadata;
   };
 
   utils = {

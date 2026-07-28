@@ -63,8 +63,8 @@ in {
 
           javascript = [
             biome
-            nodePackages.eslint
-            nodePackages.prettier
+            eslint
+            prettier
             vtsls
           ];
 

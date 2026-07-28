@@ -88,3 +88,4 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate window up" })
 
 -- LSP
 vim.keymap.set("n", "<leader>lr", require("my.lsp.lib").buf_restart_clients, { desc = "(L)sp (R)estart" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: (G)o to (D)efinition" })

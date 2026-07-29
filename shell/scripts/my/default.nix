@@ -9,8 +9,11 @@ in
   {
     name = "my";
 
+    runtimeEnv = {
+      DOTFILES_DIR = mySpecialArgs.repoPath;
+    };
+
     runtimeInputs = [
-      lib.scripts.find-dotfiles-dir
       pkgs.hostname
       pkgs.home-manager
     ];

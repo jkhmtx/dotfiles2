@@ -14,10 +14,6 @@
     storeFileName = ./home-manager/store-file-name.nix;
   };
 
-  scripts = {
-    find-dotfiles-dir = ./scripts/find-dotfiles-dir;
-  };
-
   utils = {
     flatMap = ./utils/flat-map.nix;
   };
@@ -29,7 +25,6 @@
         myLib = lib;
       });
   lib = {
-    scripts = mapAttrs (_: importWithInputs) scripts;
     utils = mapAttrs (_: importWithInputs) utils;
     home-manager = mapAttrs (_: importWithInputs) home-manager;
   };

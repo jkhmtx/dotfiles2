@@ -3,19 +3,18 @@
 set -euo pipefail
 
 export HOME="${HOME}"
-
-dotfiles_dir="$(find-dotfiles-dir)"
+export DOTFILES_DIR="${DOTFILES_DIR}"
 
 case "${1:-}" in
 dotfiles | home)
   shift
   case "${1:-}" in
   edit | e)
-    nvim "${dotfiles_dir}"
+    nvim "${DOTFILES_DIR}"
     ;;
   s | switch)
     shift
-    home-manager switch --flake "${dotfiles_dir}#$(hostname)" "${@}"
+    home-manager switch --flake "${DOTFILES_DIR}#$(hostname)" "${@}"
     ;;
   *)
     echo "Must specify one of: [edit|e|switch|s]"
@@ -27,17 +26,17 @@ machine)
   shift
   case "${1:-}" in
   edit | e)
-    nvim "${dotfiles_dir}/nixos"
+    nvim "${DOTFILES_DIR}/nixos"
     ;;
   switch)
     shift
 
-    sudo nixos-rebuild switch --flake "${dotfiles_dir}"
+    sudo nixos-rebuild switch --flake "${DOTFILES_DIR}"
     ;;
   rebuild)
     shift
 
-    sudo nixos-rebuild "${@}" --flake "${dotfiles_dir}"
+    sudo nixos-rebuild "${@}" --flake "${DOTFILES_DIR}"
     ;;
   *)
     echo "Must specify one of: [edit|e|rebuild]"

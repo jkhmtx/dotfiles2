@@ -38,7 +38,6 @@
 	prune = true
 	pruneTags = true
 	all = true
-	force = true
 [rebase]
 	autoSquash = true
 	updateRefs = true
@@ -86,6 +85,7 @@
 [alias]
 	a = add --all
 	ai = add -i
+	ap = add -p
 	#############
 	c = commit
 	ca = commit -a
@@ -104,14 +104,14 @@
 	dtc = difftool --cached
 	dw = diff --word-diff
 	#############
-	f = fetch
+	f = fetch --force
 	fo = fetch origin
 	fu = fetch upstream
-  #############
-  fp = "!f() { git fetch && git push --force-with-lease $@;  }; f"
-  fpp = "!f() { git fp --no-verify; }; f"
 	#############
-  hard = "!f() { git fetch && git reset --hard origin/main; }; f"
+	fp = "!f() { git fetch && git push --force-with-lease $@;  }; f"
+	fpp = "!f() { git fp --no-verify; }; f"
+	#############
+	hard = "!f() { git fetch && git reset --hard origin/main; }; f"
 	#############
 	l = log --oneline
 	lg = log --oneline --graph --decorate
@@ -126,15 +126,15 @@
 	psu = push -u
 	pst = push --tags
 	#############
-  up = "!f() { git fetch && git rebase origin/main; }; f"
-  upp = "!f() { git up && git push --force-with-lease; }; f"
+	up = "!f() { git fetch && git rebase origin/main; }; f"
+	upp = "!f() { git up && git push --force-with-lease; }; f"
 	#############
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
 	rbi = rebase --interactive
 	rbs = rebase --skip
-  rim = "!f() { git fetch && git rebase --interactive $@; }; f"
+	rim = "!f() { git fetch && git rebase --interactive $@; }; f"
 	#############
 	s = status
 	sb = status -s -b

@@ -7,16 +7,15 @@
     programs.git = {
       enable = true;
 
-      settings.user = {
-        email = "jakehamtexas@gmail.com";
-        name = "Jake Hamilton";
-      };
-
       signing.format = "ssh";
 
       ignores = [
-        "*~"
         "*.swp"
+        "*~"
+        ".DS_ignore"
+        ".direnv"
+        ".terraform"
+        "result"
       ];
 
       includes = [{path = ./.gitconfig;}];

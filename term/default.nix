@@ -7,9 +7,7 @@
 
       themeFile = "Catppuccin-Macchiato";
 
-      keybindings = {
-        "ctrl+shift+q" = "no_op";
-      };
+      extraConfig = builtins.readFile ./kitty.conf;
     };
   };
 }

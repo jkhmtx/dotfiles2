@@ -96,15 +96,21 @@
       inherit nixosConfiguration;
     };
 
-    personal = mkConfiguration (import ./hosts/nixos.nix {inherit inputs;});
-    work = mkConfiguration (import ./hosts/SB-US-B0E2-jhamilton.nix {inherit inputs;});
+    configs = let
+      hosts = let
+        content = builtins.attrNames (builtins.readDir ./hosts);
+      in
+        map (nixpkgs.lib.removeSuffix ".nix") content;
+    in
+      nixpkgs.lib.genAttrs hosts (
+        host:
+          mkConfiguration (import (./hosts + "/${host}" + ".nix") {inherit inputs;})
+      );
   in {
-    devShell.x86_64-linux = personal.devShell;
-    devShell.aarch64-darwin = work.devShell;
+    devShell.x86_64-linux = configs.nixos.devShell;
+    devShell.aarch64-darwin = configs.SB-US-B0E2-jhamilton.devShell;
 
-    homeConfigurations.nixos = personal.homeManagerConfiguration;
-    homeConfigurations.SB-US-B0E2-jhamilton = work.homeManagerConfiguration;
-
-    nixosConfigurations.nixos = personal.nixosConfiguration;
+    homeConfigurations = builtins.mapAttrs (_: config: config.homeManagerConfiguration) configs;
+    nixosConfigurations = builtins.mapAttrs (_: config: config.nixosConfiguration) configs;
   };
 }

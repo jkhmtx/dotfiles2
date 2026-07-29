@@ -20,8 +20,8 @@ in {
     ../home-manager
     ../secrets/home-manager.nix
     ../shell
-    ../term
-    ../tmux
+    ../term/emulator
+    ../term/multiplexer
     inputs.sops-nix.homeManagerModules.sops
   ];
   unfree = [

@@ -25,8 +25,8 @@ in {
     ../secrets/home-manager.nix
     ../shell
     ../shell/linux.nix
-    ../term
-    ../tmux
+    ../term/emulator
+    ../term/multiplexer
     inputs.sops-nix.homeManagerModules.sops
   ];
   unfree = [

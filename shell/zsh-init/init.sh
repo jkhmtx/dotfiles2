@@ -11,3 +11,8 @@ for completion in "${COMPLETIONS_DIR}"/*; do
   # shellcheck disable=SC1090
   source "${completion}"
 done
+
+# shellcheck disable=1090
+source ~/extra.zshenv >/dev/null 2>&1
+
+export PATH="${HOME}/.nix-profile/bin:/nix/var/nix/profiles/default/bin:${PATH}"

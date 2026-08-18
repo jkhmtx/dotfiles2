@@ -4,21 +4,22 @@
   ...
 } @ inputs: let
   fzf = pkgs.fzf;
+  scripts = import ./scripts inputs;
 in {
   config = {
-    home.packages = [
-      fzf
-      pkgs.jq
-      pkgs.nix-search-cli
-      pkgs.ripgrep
-      pkgs.tree
-      (import ./scripts/my inputs)
-      (import ./scripts/pr/approve inputs)
-      (import ./scripts/pr/extract inputs)
-      (import ./scripts/pr/list inputs)
-      (import ./scripts/pr/sync inputs)
-      (import ./scripts/tmux-session-find inputs)
-    ];
+    home.packages =
+      [
+        fzf
+        pkgs.jq
+        pkgs.nix-search-cli
+        pkgs.ripgrep
+        pkgs.tree
+      ]
+      ++ (pkgs.lib.mapAttrsToList (name: drv:
+        scripts.utils.build-runnable {
+          inherit name drv;
+        })
+      scripts.flattened);
 
     home.file = {
       "${config.home.homeDirectory}/shellcheckrc" = {

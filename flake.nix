@@ -90,10 +90,15 @@
         inherit specialArgs;
         modules = nixosModules ++ [./unfree.nix];
       };
+      scripts = import ./shell/scripts {
+        inherit pkgs;
+        inherit (specialArgs) mySpecialArgs;
+      };
     in {
       inherit devShell;
       inherit homeManagerConfiguration;
       inherit nixosConfiguration;
+      inherit scripts;
     };
 
     configs = let
@@ -112,5 +117,8 @@
 
     homeConfigurations = builtins.mapAttrs (_: config: config.homeManagerConfiguration) configs;
     nixosConfigurations = builtins.mapAttrs (_: config: config.nixosConfiguration) configs;
+
+    scripts.x86_64-linux.default = configs.nixos.scripts;
+    scripts.aarch64-darwin.default = configs.SB-US-B0E2-jhamilton.scripts;
   };
 }

@@ -93,7 +93,7 @@
 	cam = commit -am
 	cem = commit --allow-empty -m
 	caa = commit --amend --no-edit
-	caan = commit --amend --no-edit -n
+	caan = commit -a --amend --no-edit -n
 	#############
 	cp = cherry-pick
 	cpa = cherry-pick --abort

@@ -134,7 +134,7 @@
 	rbc = rebase --continue
 	rbi = rebase --interactive
 	rbs = rebase --skip
-	rim = "!f() { git fetch && git rebase --interactive $@; }; f"
+	rim = "!f() { git fetch && git rebase --interactive ${@:-origin/main}; }; f"
 	#############
 	s = status
 	sb = status -s -b

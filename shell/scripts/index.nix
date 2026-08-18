@@ -1,4 +1,5 @@
 [
+  {claude.hooks.post-tool-use = ./claude/hooks/post-tool-use;}
   {my = ./my;}
   {pr.approve = ./pr/approve;}
   {pr.extract = ./pr/extract;}

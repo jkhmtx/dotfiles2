@@ -1,18 +1,25 @@
 # shellcheck shell=bash
 
-list=(
-  gh pr list
-  --json 'title,url'
-  --author @me
-  --search '-is:draft'
-)
+repos=("$@")
 
-if test "${#}" = 0; then
-  "${list[@]}" | jq --raw-output 'to_entries[] | "\(.key + 1). \(.value.url) `\(.value.title)`"'
-else
-  {
-    for arg in "${@}"; do
-      "${list[@]}" --repo "${arg}"
-    done
-  } | jq --raw-output --slurp 'flatten | to_entries[] | "\(.key + 1). \(.value.url) `\(.value.title)`"'
+if test "${#repos[@]}" -eq 0; then
+  repos=("$(gh repo view --json nameWithOwner -q '.nameWithOwner')")
 fi
+
+all='[]'
+for repo in "${repos[@]}"; do
+  chunk=$(gh pr list \
+    --repo "${repo}" \
+    --author "@me" \
+    --state open \
+    --limit 100 \
+    --search '-is:draft' \
+    --json 'title,url,reviewDecision')
+  all=$(printf '%s\n%s' "${all}" "${chunk}" | jq -s '.[0] + .[1]')
+done
+
+echo "${all}" | jq --raw-output '
+  [.[] | select(.reviewDecision != "APPROVED")] |
+  to_entries[] |
+  "\(.key + 1). `\(.value.title)` \(.value.url)"
+'

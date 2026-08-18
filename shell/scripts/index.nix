@@ -1,4 +1,6 @@
 [
+  {aliased.git.rebase = ./aliased/git/rebase;}
+  {aliased.git.rebase.interactive = ./aliased/git/rebase/interactive;}
   {claude.hooks.post-tool-use = ./claude/hooks/post-tool-use;}
   {my = ./my;}
   {pr.approve = ./pr/approve;}

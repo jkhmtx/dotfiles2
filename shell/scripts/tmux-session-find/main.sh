@@ -1,5 +1,7 @@
 # shellcheck shell=bash
 
+export PATH="${PATH}"
+
 set -euo pipefail
 
 tmux ls -F '#{session_name}:#{pane_current_path}' >/tmp/tmux-sessions.raw
@@ -16,7 +18,8 @@ done >/tmp/tmux-sessions
 tmux display-popup \
   -w 80% \
   -h 60% \
-  -E "fzf \
+  -E "export PATH=${PATH}; \
+  fzf \
   --delimiter , \
   --with-nth '[{1}]: {2}' \
   --preview 'git -C {2} log --oneline --color=always --decorate | $(which bat)' \

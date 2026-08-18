@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-export OH_MY_POSH_CONFIG="${OH_MY_POSH_CONFIG}"
 export COMPLETIONS_DIR="${COMPLETIONS_DIR}"
+export OH_MY_POSH_CONFIG="${OH_MY_POSH_CONFIG}"
+export OMP_KEY="${OMP_KEY}"
 
 # Prompt theming
-eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
+oh_my_posh_cache="${HOME}"/.cache/oh-my-posh/"${OMP_KEY}"
+
+mkdir -p "${oh_my_posh_cache}"
+if ! test -f "${oh_my_posh_cache}"/init.zsh; then
+  oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}" >"${oh_my_posh_cache}"/init.zsh
+fi
+
+# shellcheck disable=1091
+source "${oh_my_posh_cache}"/init.zsh
 
 # Completions
 for completion in "${COMPLETIONS_DIR}"/*; do

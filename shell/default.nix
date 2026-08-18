@@ -31,7 +31,7 @@ in {
 
     programs.fzf = {
       enable = true;
-      # enableZshIntegration = true;
+      enableZshIntegration = true;
       package = fzf;
     };
 

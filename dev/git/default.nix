@@ -12,7 +12,7 @@
       ignores = [
         "*.swp"
         "*~"
-        ".DS_ignore"
+        ".DS_Store"
         ".direnv"
         ".terraform"
         "result"

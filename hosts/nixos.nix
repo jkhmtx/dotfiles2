@@ -6,6 +6,7 @@
     description = "Jake Hamilton";
   };
 in {
+  inherit (inputs) nixpkgs;
   system = "x86_64-linux";
   hostKind = "personal";
   inherit user;

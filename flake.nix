@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-work.url = "github:nixos/nixpkgs/nixos-unstable";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -41,6 +42,7 @@
       hostKind,
       modules,
       nixosModules,
+      nixpkgs,
       repoPath,
       system,
       unfree,

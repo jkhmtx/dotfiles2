@@ -9,7 +9,6 @@ local formatters_by_ft = {
 	terraform = terraform,
 	tf = terraform,
 	["terraform-vars"] = terraform,
-	hyprlang = { "hyprlang-fmt" },
 	rust = { "rustfmt" },
 
 	javascript = prettier,
@@ -44,12 +43,6 @@ require("lze").load({
 			local conform = require("conform")
 
 			conform.setup({
-				formatters = {
-					["hyprlang-fmt"] = {
-						command = "hyprlang-fmt",
-						inherit = false,
-					},
-				},
 				formatters_by_ft = formatters_by_ft,
 			})
 			local autoformatting = vim.api.nvim_create_augroup("AutoFormatting", {})

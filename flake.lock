@@ -21,9 +21,7 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1756496801,
@@ -36,25 +34,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "hyprlang-fmt": {
-      "inputs": {
-        "nixpkgs": ["nixpkgs"],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1761418171,
-        "narHash": "sha256-qw5XGNfCsi9CHDlqq7pEcx1qzjhE/s7y9a7EbUr5maM=",
-        "owner": "jkhmtx",
-        "repo": "hyprlang-fmt",
-        "rev": "3527f32087082289d906a516933eaaaad9771f51",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jkhmtx",
-        "repo": "hyprlang-fmt",
         "type": "github"
       }
     },
@@ -109,7 +88,6 @@
       "inputs": {
         "fenix": "fenix",
         "home-manager": "home-manager",
-        "hyprlang-fmt": "hyprlang-fmt",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "nixpkgs-work": "nixpkgs-work",
@@ -135,7 +113,7 @@
     },
     "rust-overlay": {
       "inputs": {
-        "nixpkgs": ["hyprlang-fmt", "nixpkgs"]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1761359705,

@@ -36,9 +36,16 @@ in {
     ../nixos/password-manager/unfree.nix
     ../secrets/scripts/find-age-recipient/unfree.nix
   ];
-  nixosModules = [
-    ../nixos/configuration.nix
-    ../secrets
-    inputs.sops-nix.nixosModules.sops
-  ];
+  nixOs = {
+    unfree = [
+      ../nixos/display/unfree.nix
+      ../nixos/games/unfree.nix
+      ../nixos/password-manager/unfree.nix
+    ];
+    modules = [
+      ../nixos/configuration.nix
+      ../secrets
+      inputs.sops-nix.nixosModules.sops
+    ];
+  };
 }

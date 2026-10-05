@@ -36,7 +36,7 @@
     mkConfiguration = {
       hostKind,
       modules,
-      nixosModules,
+      nixOs,
       nixpkgs,
       repoPath,
       system,
@@ -82,11 +82,15 @@
             exec zsh --login
           '';
         };
-      nixosConfiguration = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit specialArgs;
-        modules = nixosModules ++ [./unfree.nix];
-      };
+      nixosConfiguration =
+        if nixOs != null
+        then
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            inherit specialArgs;
+            modules = nixOs.modules ++ [./unfree.nix];
+          }
+        else null;
       scripts = import ./shell/scripts {
         inherit pkgs;
         inherit (specialArgs) mySpecialArgs;

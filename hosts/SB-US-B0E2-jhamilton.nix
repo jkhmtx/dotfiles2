@@ -28,5 +28,5 @@ in {
   unfree = [
     ../secrets/scripts/find-age-recipient/unfree.nix
   ];
-  nixosModules = [];
+  nixOs = null;
 }

@@ -70,4 +70,5 @@ in {
   environment.systemPackages = [
     pkgs.usbutils
   ];
+  nixpkgs.config.problems.handlers.rtl8852bu.broken = "warn";
 }

@@ -2,8 +2,16 @@
   config,
   lib,
   pkgs,
+  mySpecialArgs,
   ...
 }: let
+  inherit (mySpecialArgs) system;
+  inherit (mySpecialArgs.inputs) nixpkgs-local;
+
+  local = import nixpkgs-local {
+    inherit system;
+  };
+
   tpLinkArcherTx16750uNano = {
     idVendor = "0bda";
     idProduct = "1a2b";
@@ -17,7 +25,8 @@ in {
   ];
 
   boot.extraModulePackages = [
-    config.boot.kernelPackages."${tpLinkArcherTx16750uNano.realtekDriver}"
+    local.linuxKernel.packages.linux_6_18."${tpLinkArcherTx16750uNano.realtekDriver}"
+    # config.boot.kernelPackages."${tpLinkArcherTx16750uNano.realtekDriver}"
   ];
 
   services.udev.extraRules =

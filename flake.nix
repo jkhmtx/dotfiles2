@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-local.url = "git+file:///home/jakeh/projects/nixpkgs";
+    # nixpkgs-local.url = "git+file:///home/jakeh/projects/nixpkgs";
     nixpkgs-work.url = "github:nixos/nixpkgs/nixos-unstable";
 
     fenix = {

@@ -3,7 +3,6 @@
     ./sshd.nix
     ./firewall.nix
     ./network-manager.nix
-    ./udev.nix
     ./tunnel.nix
   ];
 

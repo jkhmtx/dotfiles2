@@ -43,7 +43,7 @@
       graphics.enable = true;
       nvidia = {
         modesetting.enable = true;
-        open = true;
+        open = false;
 
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
         # Enable this if you have graphical corruption issues or application crashes after waking
@@ -55,8 +55,6 @@
         # Experimental and only works on modern Nvidia GPUs (Turing or newer).
         powerManagement.finegrained = false;
         nvidiaSettings = true;
-
-        package = config.boot.kernelPackages.nvidiaPackages.beta;
       };
     };
   };

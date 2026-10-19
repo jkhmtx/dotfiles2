@@ -18,6 +18,7 @@ in {
     ./networking
     ./password-manager
   ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

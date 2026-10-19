@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-local.url = "git+file:///home/jakeh/projects/nixpkgs";
+    nixpkgs-work.url = "github:nixos/nixpkgs/nixos-unstable";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -11,11 +13,6 @@
 
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
-    };
-
-    hyprlang-fmt = {
-      url = "github:jkhmtx/hyprlang-fmt";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
@@ -40,7 +37,8 @@
     mkConfiguration = {
       hostKind,
       modules,
-      nixosModules,
+      nixOs,
+      nixpkgs,
       repoPath,
       system,
       unfree,
@@ -85,11 +83,15 @@
             exec zsh --login
           '';
         };
-      nixosConfiguration = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit specialArgs;
-        modules = nixosModules ++ [./unfree.nix];
-      };
+      nixosConfiguration =
+        if nixOs != null
+        then
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            inherit specialArgs;
+            modules = nixOs.modules ++ [./unfree.nix];
+          }
+        else null;
       scripts = import ./shell/scripts {
         inherit pkgs;
         inherit (specialArgs) mySpecialArgs;

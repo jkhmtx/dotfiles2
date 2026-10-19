@@ -18,6 +18,9 @@ return function(opts)
 					home_manager = {
 						expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.jakeh.options',
 					},
+					["home-manager"] = {
+						expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.jakeh.options',
+					},
 				},
 			},
 		},

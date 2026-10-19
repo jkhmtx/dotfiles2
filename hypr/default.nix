@@ -20,6 +20,12 @@ in {
         outOfStoreSymlink = true;
         source = ./hypridle.conf;
       };
+      "${homeDirectory}/.config/hypr/hyprland.lua" = {
+        enable = true;
+        force = true;
+        outOfStoreSymlink = true;
+        source = ./hyprland.lua;
+      };
     };
   };
 }

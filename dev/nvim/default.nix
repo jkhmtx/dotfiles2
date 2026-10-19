@@ -4,11 +4,10 @@
   mySpecialArgs,
   ...
 }: let
-  inherit (mySpecialArgs) inputs system;
+  inherit (mySpecialArgs) inputs;
   inherit (inputs) nixCats nixpkgs;
   inherit (nixCats) utils;
 
-  hyprlang-fmt = inputs.hyprlang-fmt.packages."${system}".default;
   rustToolchain = import ../rust/toolchain.nix pkgs;
 in {
   imports = [
@@ -53,13 +52,6 @@ in {
             fd
             stdenv.cc.cc
           ];
-
-          hyprlang =
-            if stdenv.isLinux
-            then [
-              hyprlang-fmt
-            ]
-            else [];
 
           javascript = [
             biome
@@ -219,7 +211,6 @@ in {
             themer = true;
 
             # Languages
-            hyprlang = pkgs.stdenv.isLinux;
             lua = true;
             markdown = true;
             nix = true;

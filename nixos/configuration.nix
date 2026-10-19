@@ -18,6 +18,7 @@ in {
     ./networking
     ./password-manager
   ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -70,4 +71,5 @@ in {
   environment.systemPackages = [
     pkgs.usbutils
   ];
+  nixpkgs.config.problems.handlers.rtl8852bu.broken = "warn";
 }

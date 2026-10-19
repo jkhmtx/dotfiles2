@@ -6,6 +6,7 @@
     description = null;
   };
 in {
+  nixpkgs = inputs.nixpkgs-work;
   system = "aarch64-darwin";
   hostKind = "work";
   inherit user;
@@ -27,5 +28,5 @@ in {
   unfree = [
     ../secrets/scripts/find-age-recipient/unfree.nix
   ];
-  nixosModules = [];
+  nixOs = null;
 }

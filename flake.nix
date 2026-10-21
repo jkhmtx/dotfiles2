@@ -88,7 +88,9 @@
         then
           nixpkgs.lib.nixosSystem {
             inherit system;
-            inherit specialArgs;
+            specialArgs = {
+              mySpecialArgs = specialArgs.mySpecialArgs // {unfree = nixOs.unfree or [];};
+            };
             modules = nixOs.modules ++ [./unfree.nix];
           }
         else null;

@@ -1,6 +1,7 @@
 {
   "name": "claude-code",
   "dependencies": {
-    "@anthropic-ai/claude-code": "*"
+    "@anthropic-ai/claude-code": "*",
+    "ccstatusline": "*"
   }
 }

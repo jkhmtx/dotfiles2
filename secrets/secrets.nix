@@ -1,15 +1,6 @@
-{
-  lib,
-  config,
-  mySpecialArgs,
-  ...
-}: let
+{mySpecialArgs, ...}: let
   inherit (mySpecialArgs.user) home;
 in {
-  options = {
-    secrets.enable = lib.mkIf config.secrets.enable "enable secrets";
-  };
-
   config = {
     sops = {
       age.sshKeyPaths = ["${home}/.ssh/id_ed25519"];

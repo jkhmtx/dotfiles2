@@ -20,6 +20,7 @@ in {
       # https://wiki.hypr.land/Useful-Utilities/Must-have/#a-notification-daemon
       pkgs.dunst
       pkgs.hypridle
+      pkgs.hyprlock
       # notify-send
       pkgs.libnotify
       # https://wiki.hypr.land/Useful-Utilities/App-Launchers/#rofi-wayland-fork
@@ -33,11 +34,11 @@ in {
     ];
 
     home.file = lib.home-manager.mkSymlinkAttrs {
-      "${homeDirectory}/.config/hypr/hyprland.conf" = {
+      "${homeDirectory}/.config/hypr/hyprlock.conf" = {
         enable = true;
         force = true;
         outOfStoreSymlink = true;
-        source = ./hyprland.conf;
+        source = ./hyprlock.conf;
       };
       "${homeDirectory}/.config/hypr/hypridle.conf" = {
         enable = true;

@@ -14,7 +14,7 @@ dotfiles | home)
     ;;
   s | switch)
     shift
-    home-manager switch --flake "${DOTFILES_DIR}#$(hostname)" "${@}"
+    home-manager switch --flake "${DOTFILES_DIR}#$(whoami)@$(hostname)" "${@}"
     ;;
   *)
     echo "Must specify one of: [edit|e|switch|s]"

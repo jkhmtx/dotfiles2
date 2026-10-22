@@ -1,24 +1,13 @@
-{
-  lib,
-  config,
-  mySpecialArgs,
-  ...
-}: let
+{mySpecialArgs, ...}: let
   inherit (mySpecialArgs.user) home;
 in {
-  options = {
-    secrets.enable = lib.mkIf config.secrets.enable "enable secrets";
-  };
-
   config = {
     sops = {
       age.sshKeyPaths = ["${home}/.ssh/id_ed25519"];
       defaultSopsFile = ./secrets.yaml;
       secrets.githubToken = {};
-      secrets.home-wifi-password = {};
       secrets.master-gpg-secret-key = {};
       secrets.master-gpg-public-key = {};
-      secrets.cloudflared = {};
       secrets.ssh-private-key = {
         path = "~/.ssh/id_ed25519";
       };

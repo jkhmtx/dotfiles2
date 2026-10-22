@@ -8,42 +8,44 @@
 in {
   inherit (inputs) nixpkgs;
   system = "x86_64-linux";
-  hostKind = "personal";
-  inherit user;
-  repoPath = "${user.home}/projects/dotfiles";
-  modules = [
-    ../audio/composition.nix
-    ../audio/daw.nix
-    ../dev/direnv
-    ../dev/git
-    ../dev/github
-    ../dev/nvim
-    ../dev/rust
-    ../dev/ssh
-    ../borg
-    ../home-manager
-    ../hypr
-    ../secrets/home-manager.nix
-    ../shell
-    ../shell/linux.nix
-    ../term/emulator
-    ../term/multiplexer
-    inputs.sops-nix.homeManagerModules.sops
-  ];
-  unfree = [
-    ../nixos/display/unfree.nix
-    ../nixos/games/unfree.nix
-    ../nixos/password-manager/unfree.nix
-    ../secrets/scripts/find-age-recipient/unfree.nix
-  ];
+  users.${user.name} = {
+    inherit user;
+    repoPath = "${user.home}/projects/dotfiles";
+    modules = [
+      ../audio/composition.nix
+      ../audio/daw.nix
+      ../dev/direnv
+      ../dev/git
+      ../dev/github
+      ../dev/llm/claude
+      ../dev/llm/claude/update
+      ../dev/nvim
+      ../dev/rust
+      ../dev/ssh
+      ../borg
+      ../browser
+      ../home-manager
+      ../hypr
+      ../secrets/home-manager.nix
+      ../shell
+      ../shell/linux.nix
+      ../term/emulator
+      ../term/multiplexer
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+    unfree = [
+      ../secrets/scripts/find-age-recipient/unfree.nix
+    ];
+  };
   nixOs = {
     unfree = [
-      ../nixos/display/unfree.nix
+      ../nixos/hardware/unfree.nix
       ../nixos/games/unfree.nix
       ../nixos/password-manager/unfree.nix
     ];
     modules = [
       ../nixos/configuration.nix
+      ../nixos/users/jakeh.nix
       ../secrets
       inputs.sops-nix.nixosModules.sops
     ];

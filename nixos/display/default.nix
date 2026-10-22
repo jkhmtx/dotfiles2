@@ -1,12 +1,8 @@
 {...}: {
   imports = [
     ./hyprland.nix
-    ./plasma5.nix
-    ./screenshot.nix
+    ./xserver.nix
   ];
-
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "jakeh";
 
   services.displayManager.sddm.enable = true;
 

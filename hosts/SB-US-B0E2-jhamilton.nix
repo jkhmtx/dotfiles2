@@ -9,7 +9,6 @@ in {
   nixpkgs = inputs.nixpkgs-work;
   system = "aarch64-darwin";
   users.${user.name} = {
-    hostKind = "work";
     inherit user;
     repoPath = "${user.home}/dotfiles2";
     modules = [

@@ -63,17 +63,16 @@
         specialArgs;
 
       mkUser = {
-        hostKind,
         modules,
         repoPath,
         unfree,
         user,
         ...
       }: let
-        specialArgs = mkSpecialArgs {inherit user unfree repoPath hostKind;};
+        specialArgs = mkSpecialArgs {inherit user unfree repoPath;};
         inherit (specialArgs.mySpecialArgs) lib;
 
-          homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
+        homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [./unfree.nix] ++ modules;
           extraSpecialArgs = specialArgs;
@@ -135,7 +134,7 @@
     homeConfigurations = nixpkgs.lib.concatMapAttrs (host: config:
       nixpkgs.lib.mapAttrs' (name: user: nixpkgs.lib.nameValuePair "${name}@${host}" user.homeManagerConfiguration) config.users)
     configs;
-    nixosConfigurations = builtins.mapAttrs (_: config: config.nixosConfiguration) configs;
+    nixosConfigurations = nixpkgs.lib.filterAttrs (_: config: config != null) (builtins.mapAttrs (_: config: config.nixosConfiguration) configs);
 
     scripts.x86_64-linux.default = configs.nixos.users.jakeh.scripts;
     scripts.aarch64-darwin.default = configs.SB-US-B0E2-jhamilton.users.jake.scripts;

@@ -35,11 +35,11 @@ Flakes only see git-tracked files: `git add` new files before building.
 
 ## Architecture
 
-**`flake.nix` → `mkConfiguration`.** Every file in `hosts/` is auto-discovered and passed to `mkConfiguration`. A host file declares `nixpkgs`, `system`, `users.<name>` (per-user: `user`, `hostKind`, `repoPath`, Home Manager `modules`, `unfree`) and `nixOs` (machine: `modules`, `unfree`; `null` for HM-only hosts). Each user becomes `homeConfigurations."<name>@<host>"`; the machine becomes `nixosConfigurations.<host>`. `devShell` and `scripts` outputs are taken from a named user per system in the flake outputs.
+**`flake.nix` → `mkConfiguration`.** Every file in `hosts/` is auto-discovered and passed to `mkConfiguration`. A host file declares `nixpkgs`, `system`, `users.<name>` (per-user: `user`, `repoPath`, Home Manager `modules`, `unfree`) and `nixOs` (machine: `modules`, `unfree`; `null` for HM-only hosts). Each user becomes `homeConfigurations."<name>@<host>"`; the machine becomes `nixosConfigurations.<host>`. `devShell` and `scripts` outputs are taken from a named user per system in the flake outputs.
 
 **Machine vs per-user.** NixOS modules get only machine-level `mySpecialArgs` (`rootPath`, `system`, `inputs`, `lib`, `unfree`) — no `user`/`repoPath` — so machine config can't depend on a user. A user's machine-side needs (account, SSH access, auto-login, polkit ownership) live in `nixos/users/<name>.nix`, listed in the host's `nixOs.modules`. Desktop tooling and apps belong in Home Manager modules; `nixos/display` only offers sessions.
 
-**`mySpecialArgs` (Home Manager).** `rootPath`, `repoPath`, `system`, `inputs`, `lib` (this repo's `lib/`, not nixpkgs lib), `user`, `unfree`, `hostKind` (`personal`/`work`). Modules read user specifics from here rather than hardcoding.
+**`mySpecialArgs` (Home Manager).** `rootPath`, `repoPath`, `system`, `inputs`, `lib` (this repo's `lib/`, not nixpkgs lib), `user`, `unfree`. Modules read user specifics from here rather than hardcoding.
 
 **Unfree packages.** Each feature that needs unfree packages has an `unfree.nix` returning a list of package names. `unfree.nix` at the root builds `allowUnfreePredicate` from `mySpecialArgs.unfree` — the user's `unfree` list for Home Manager, and `nixOs.unfree` for the NixOS system. New unfree packages must be listed in a feature `unfree.nix` *and* that file referenced in the relevant list.
 

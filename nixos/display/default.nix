@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./hyprland.nix
-    ./plasma5.nix
+    ./xserver.nix
   ];
 
   services.displayManager.sddm.enable = true;

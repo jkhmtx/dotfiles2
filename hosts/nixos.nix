@@ -9,7 +9,6 @@ in {
   inherit (inputs) nixpkgs;
   system = "x86_64-linux";
   users.${user.name} = {
-    hostKind = "personal";
     inherit user;
     repoPath = "${user.home}/projects/dotfiles";
     modules = [

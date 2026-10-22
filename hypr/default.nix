@@ -8,8 +8,6 @@
   inherit (config.home) homeDirectory;
 in {
   config = {
-    services.hypridle.enable = true;
-
     home.sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };

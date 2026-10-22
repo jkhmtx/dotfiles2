@@ -8,25 +8,27 @@
 in {
   nixpkgs = inputs.nixpkgs-work;
   system = "aarch64-darwin";
-  hostKind = "work";
-  inherit user;
-  repoPath = "${user.home}/dotfiles2";
-  modules = [
-    ../dev/direnv
-    ../dev/git
-    ../dev/github
-    ../dev/nvim
-    ../dev/rust
-    ../dev/ssh
-    ../home-manager
-    ../secrets/home-manager.nix
-    ../shell
-    ../term/emulator
-    ../term/multiplexer
-    inputs.sops-nix.homeManagerModules.sops
-  ];
-  unfree = [
-    ../secrets/scripts/find-age-recipient/unfree.nix
-  ];
+  users.${user.name} = {
+    hostKind = "work";
+    inherit user;
+    repoPath = "${user.home}/dotfiles2";
+    modules = [
+      ../dev/direnv
+      ../dev/git
+      ../dev/github
+      ../dev/nvim
+      ../dev/rust
+      ../dev/ssh
+      ../home-manager
+      ../secrets/home-manager.nix
+      ../shell
+      ../term/emulator
+      ../term/multiplexer
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+    unfree = [
+      ../secrets/scripts/find-age-recipient/unfree.nix
+    ];
+  };
   nixOs = null;
 }

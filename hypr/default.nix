@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   mySpecialArgs,
   ...
@@ -7,6 +8,32 @@
   inherit (config.home) homeDirectory;
 in {
   config = {
+    services.hypridle.enable = true;
+
+    home.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+
+    home.packages = [
+      pkgs.wl-clipboard
+      # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/#cliphist
+      pkgs.cliphist
+      pkgs.kdePackages.dolphin
+      # https://wiki.hypr.land/Useful-Utilities/Must-have/#a-notification-daemon
+      pkgs.dunst
+      pkgs.hypridle
+      # notify-send
+      pkgs.libnotify
+      # https://wiki.hypr.land/Useful-Utilities/App-Launchers/#rofi-wayland-fork
+      pkgs.rofi
+      # https://wiki.hypr.land/Useful-Utilities/Status-Bars/#waybar
+      (pkgs.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      }))
+      pkgs.swayimg
+      pkgs.grimblast
+    ];
+
     home.file = lib.home-manager.mkSymlinkAttrs {
       "${homeDirectory}/.config/hypr/hyprland.conf" = {
         enable = true;

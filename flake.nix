@@ -35,14 +35,10 @@
     inherit (self) inputs;
 
     mkConfiguration = {
-      hostKind,
-      modules,
       nixOs,
       nixpkgs,
-      repoPath,
       system,
-      unfree,
-      user,
+      users,
       ...
     }: let
       pkgs = import nixpkgs {
@@ -50,59 +46,76 @@
         overlays = [inputs.fenix.overlays.default];
       };
 
-      lib = import ./lib ({inherit pkgs;} // specialArgs);
+      mkSpecialArgs = args: let
+        lib = import ./lib ({inherit pkgs;} // specialArgs);
 
-      specialArgs = {
-        mySpecialArgs = {
-          rootPath = toString self;
-          inherit system;
-          inherit inputs;
-          inherit lib;
-          inherit user unfree repoPath hostKind;
+        specialArgs = {
+          mySpecialArgs =
+            {
+              rootPath = toString self;
+              inherit system;
+              inherit inputs;
+              inherit lib;
+            }
+            // args;
         };
-      };
-
-      homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./unfree.nix] ++ modules;
-        extraSpecialArgs = specialArgs;
-      };
-
-      secrets = homeManagerConfiguration.config.sops.secrets;
-      devShell = let
-        importEach = lib.utils.flatMap (module:
-          import module {
-            inherit secrets;
-            inherit pkgs;
-          });
       in
-        pkgs.mkShell {
-          name = "dev";
-          packages = importEach [.github/terraform/shell.nix];
-          shellHook = ''
-            exec zsh --login
-          '';
+        specialArgs;
+
+      mkUser = {
+        hostKind,
+        modules,
+        repoPath,
+        unfree,
+        user,
+        ...
+      }: let
+        specialArgs = mkSpecialArgs {inherit user unfree repoPath hostKind;};
+        inherit (specialArgs.mySpecialArgs) lib;
+
+          homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [./unfree.nix] ++ modules;
+          extraSpecialArgs = specialArgs;
         };
+
+        secrets = homeManagerConfiguration.config.sops.secrets;
+        devShell = let
+          importEach = lib.utils.flatMap (module:
+            import module {
+              inherit secrets;
+              inherit pkgs;
+            });
+        in
+          pkgs.mkShell {
+            name = "dev";
+            packages = importEach [.github/terraform/shell.nix];
+            shellHook = ''
+              exec zsh --login
+            '';
+          };
+        scripts = import ./shell/scripts {
+          inherit pkgs;
+          inherit (specialArgs) mySpecialArgs;
+        };
+      in {
+        inherit devShell;
+        inherit homeManagerConfiguration;
+        inherit scripts;
+      };
+
       nixosConfiguration =
         if nixOs != null
         then
           nixpkgs.lib.nixosSystem {
             inherit system;
-            specialArgs = {
-              mySpecialArgs = specialArgs.mySpecialArgs // {unfree = nixOs.unfree or [];};
-            };
+            specialArgs = mkSpecialArgs {unfree = nixOs.unfree or [];};
             modules = nixOs.modules ++ [./unfree.nix];
           }
         else null;
-      scripts = import ./shell/scripts {
-        inherit pkgs;
-        inherit (specialArgs) mySpecialArgs;
-      };
     in {
-      inherit devShell;
-      inherit homeManagerConfiguration;
       inherit nixosConfiguration;
-      inherit scripts;
+      users = builtins.mapAttrs (_: mkUser) users;
     };
 
     configs = let
@@ -116,13 +129,15 @@
           mkConfiguration (import (./hosts + "/${host}" + ".nix") {inherit inputs;})
       );
   in {
-    devShell.x86_64-linux = configs.nixos.devShell;
-    devShell.aarch64-darwin = configs.SB-US-B0E2-jhamilton.devShell;
+    devShell.x86_64-linux = configs.nixos.users.jakeh.devShell;
+    devShell.aarch64-darwin = configs.SB-US-B0E2-jhamilton.users.jake.devShell;
 
-    homeConfigurations = builtins.mapAttrs (_: config: config.homeManagerConfiguration) configs;
+    homeConfigurations = nixpkgs.lib.concatMapAttrs (host: config:
+      nixpkgs.lib.mapAttrs' (name: user: nixpkgs.lib.nameValuePair "${name}@${host}" user.homeManagerConfiguration) config.users)
+    configs;
     nixosConfigurations = builtins.mapAttrs (_: config: config.nixosConfiguration) configs;
 
-    scripts.x86_64-linux.default = configs.nixos.scripts;
-    scripts.aarch64-darwin.default = configs.SB-US-B0E2-jhamilton.scripts;
+    scripts.x86_64-linux.default = configs.nixos.users.jakeh.scripts;
+    scripts.aarch64-darwin.default = configs.SB-US-B0E2-jhamilton.users.jake.scripts;
   };
 }

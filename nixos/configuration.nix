@@ -1,19 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  pkgs,
-  mySpecialArgs,
-  ...
-}: let
-  inherit (mySpecialArgs) user;
-in {
+{pkgs, ...}: {
   imports = [
     ./audio
     ./browser
     ./display
-    ./fonts
     ./games
+    ./hardware/nvidia.nix
     ./hardware-configuration.nix
     ./networking
     ./password-manager
@@ -49,14 +43,6 @@ in {
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user.name} = {
-    isNormalUser = true;
-    description = user.description;
-    extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
-  };
 
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;

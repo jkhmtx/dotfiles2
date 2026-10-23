@@ -27,6 +27,7 @@ Checking a change without activating it:
 Other:
 
 - `edit-home-secrets` — edit `secrets/secrets.yaml` with sops (age key derived from `~/.ssh/id_ed25519`).
+- `find-age-recipient` — after 1Password unlock, writes `~/.ssh/id_ed25519` (+ `-age` copies) and the sops age key from the 1Password `nixos` item. `check-ssh-key` (run automatically at the end of `find-age-recipient`) — compares fingerprints of 1Password's key, `~/.ssh/id_ed25519`, the repo's `id_ed25519.pub`, the `ssh-private-key` decrypted from `secrets.yaml`, and the `.sops.yaml` recipient; works before the first `my home switch`.
 - `claude.update` — regenerate `dev/llm/claude/package-lock.json` (Claude Code is installed from that npm lockfile, not nixpkgs).
 - `nix develop` — dev shell with `tofu` and the `.github/terraform` plan/apply scripts (manages GitHub repo settings).
 

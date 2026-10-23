@@ -5,5 +5,6 @@
     pkgs.sops
     (import ./scripts/edit args)
     (import ./scripts/find-age-recipient args)
+    (import ./scripts/check-ssh-key args)
   ];
 }

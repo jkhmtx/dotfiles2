@@ -1,4 +1,8 @@
-{mySpecialArgs, ...}: let
+{
+  config,
+  mySpecialArgs,
+  ...
+}: let
   inherit (mySpecialArgs.user) home;
 in {
   config = {
@@ -9,7 +13,7 @@ in {
       secrets.master-gpg-secret-key = {};
       secrets.master-gpg-public-key = {};
       secrets.ssh-private-key = {
-        path = "~/.ssh/id_ed25519";
+        path = "${config.home.homeDirectory}/.ssh/id_ed25519-sops";
       };
     };
   };

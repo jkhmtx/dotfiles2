@@ -9,5 +9,7 @@
   {pr.print-approval-script = ./pr/print-approval-script;}
   {pr.sync = ./pr/sync;}
   {tmux-session-find = ./tmux-session-find;}
+  {tmux-window-move-session = ./tmux-window-move-session;}
+  {tmux-window-new = ./tmux-window-new;}
   {utils.build-runnable = ./utils/build-runnable;}
 ]

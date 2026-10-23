@@ -13,9 +13,6 @@
 
     services.openssh.settings.AllowUsers = ["jakeh"]; # Allows all users by default. Can be [ "user1" "user2" ]
 
-    services.displayManager.autoLogin.enable = true;
-    services.displayManager.autoLogin.user = "jakeh";
-
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     programs._1password-gui.polkitPolicyOwners = ["jakeh"];

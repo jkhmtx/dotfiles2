@@ -5,6 +5,12 @@
     home = "/home/jakeh";
     description = "Jake Hamilton";
   };
+  sara = {
+    name = "sara";
+
+    home = "/home/sara";
+    description = "Sara";
+  };
 in {
   inherit (inputs) nixpkgs;
   system = "x86_64-linux";
@@ -37,6 +43,15 @@ in {
       ../secrets/scripts/find-age-recipient/unfree.nix
     ];
   };
+  users.${sara.name} = {
+    user = sara;
+    repoPath = "${sara.home}/projects/dotfiles";
+    modules = [
+      ../browser/brave.nix
+      ../home-manager
+    ];
+    unfree = [];
+  };
   nixOs = {
     unfree = [
       ../nixos/hardware/unfree.nix
@@ -46,6 +61,7 @@ in {
     modules = [
       ../nixos/configuration.nix
       ../nixos/users/jakeh.nix
+      ../nixos/users/sara.nix
       ../secrets
       inputs.sops-nix.nixosModules.sops
     ];

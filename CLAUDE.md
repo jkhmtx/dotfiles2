@@ -14,6 +14,7 @@ A Nix flake holding Home Manager configs (and, for the personal machine, a NixOS
 The `my` script (`shell/scripts/my/main.sh`) wraps the usual workflows:
 
 - `my home switch` — `home-manager switch --flake <repo>#$(whoami)@$(hostname)` (config name = `<user>@<host file name>`, so the hostname must match).
+- `my home switch-user <name>` — build `<name>@$(hostname)` from the local checkout and run its activation as that user via `sudo -iu` (no push needed).
 - `my machine switch` — `sudo nixos-rebuild switch --flake <repo>`; `my machine rebuild <subcmd>` for other `nixos-rebuild` verbs (e.g. `build`, `dry-build`).
 - `my gc <days>` — wipe old profile generations and GC the store.
 

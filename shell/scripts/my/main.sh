@@ -16,8 +16,14 @@ dotfiles | home)
     shift
     home-manager switch --flake "${DOTFILES_DIR}#$(whoami)@$(hostname)" "${@}"
     ;;
+  switch-user)
+    shift
+    user="${1:?Specify a user}"
+    generation="$(nix build --no-link --print-out-paths "${DOTFILES_DIR}#homeConfigurations.\"${user}@$(hostname)\".activationPackage")"
+    sudo -iu "${user}" "${generation}/activate"
+    ;;
   *)
-    echo "Must specify one of: [edit|e|switch|s]"
+    echo "Must specify one of: [edit|e|switch|s|switch-user]"
     exit 1
     ;;
   esac

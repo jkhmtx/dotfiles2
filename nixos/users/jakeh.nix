@@ -16,5 +16,10 @@
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     programs._1password-gui.polkitPolicyOwners = ["jakeh"];
+
+    systemd.tmpfiles.settings.accountsservice-jakeh."/var/lib/AccountsService/users/jakeh"."f+" = {
+      mode = "0600";
+      argument = "[User]\nXSession=hyprland-uwsm\n";
+    };
   };
 }

@@ -11,6 +11,18 @@
     home = "/home/sara";
     description = "Sara";
   };
+  lucy = {
+    name = "lucy";
+
+    home = "/home/lucy";
+    description = "Lucy";
+  };
+  maddie = {
+    name = "maddie";
+
+    home = "/home/maddie";
+    description = "Maddie";
+  };
 in {
   inherit (inputs) nixpkgs;
   system = "x86_64-linux";
@@ -52,6 +64,24 @@ in {
     ];
     unfree = [];
   };
+  users.${lucy.name} = {
+    user = lucy;
+    repoPath = "${lucy.home}/projects/dotfiles";
+    modules = [
+      ../browser/brave.nix
+      ../home-manager
+    ];
+    unfree = [];
+  };
+  users.${maddie.name} = {
+    user = maddie;
+    repoPath = "${maddie.home}/projects/dotfiles";
+    modules = [
+      ../browser/brave.nix
+      ../home-manager
+    ];
+    unfree = [];
+  };
   nixOs = {
     unfree = [
       ../nixos/hardware/unfree.nix
@@ -62,6 +92,8 @@ in {
       ../nixos/configuration.nix
       ../nixos/users/jakeh.nix
       ../nixos/users/sara.nix
+      ../nixos/users/lucy.nix
+      ../nixos/users/maddie.nix
       ../secrets
       inputs.sops-nix.nixosModules.sops
     ];

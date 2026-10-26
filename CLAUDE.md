@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Nix flake holding Home Manager configs (and, for the personal machine, a NixOS system config) for two hosts:
 
-- `hosts/nixos.nix` — personal Linux box (`x86_64-linux`, users `jakeh` with the repo at `~/projects/dotfiles`, and `sara`), Home Manager + NixOS.
+- `hosts/nixos.nix` — personal Linux box (`x86_64-linux`, users `jakeh` with the repo at `~/projects/dotfiles`, `sara`, `lucy` and `maddie`), Home Manager + NixOS.
 - `hosts/SB-US-B0E2-jhamilton.nix` — work Mac (`aarch64-darwin`, user `jake`, repo at `~/dotfiles2`, pinned to the `nixpkgs-work` input), Home Manager only.
 
 ## Commands

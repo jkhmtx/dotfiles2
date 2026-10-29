@@ -30,5 +30,10 @@
       };
       "a+".argument = "default:group::rwx,default:mask::rwx";
     };
+    systemd.tmpfiles.settings.steamlibrary-jakeh."/srv/steam/steamapps/compatdata".d = {
+      mode = "2775";
+      user = "jakeh";
+      group = "steamlibrary";
+    };
   };
 }

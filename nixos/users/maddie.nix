@@ -3,7 +3,7 @@
     users.users.maddie = {
       isNormalUser = true;
       description = "Maddie";
-      extraGroups = ["networkmanager"];
+      extraGroups = ["networkmanager" "steamlibrary"];
     };
 
     systemd.tmpfiles.settings.accountsservice-maddie."/var/lib/AccountsService/users/maddie"."f+" = {

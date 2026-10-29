@@ -4,7 +4,7 @@
     users.users.jakeh = {
       isNormalUser = true;
       description = "Jake Hamilton";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "steamlibrary" "wheel"];
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         (builtins.readFile ../../id_ed25519.pub)
@@ -20,6 +20,15 @@
     systemd.tmpfiles.settings.accountsservice-jakeh."/var/lib/AccountsService/users/jakeh"."f+" = {
       mode = "0600";
       argument = "[User]\nXSession=hyprland-uwsm\n";
+    };
+
+    systemd.tmpfiles.settings.steamlibrary-jakeh."/srv/steam" = {
+      d = {
+        mode = "2775";
+        user = "jakeh";
+        group = "steamlibrary";
+      };
+      "a+".argument = "default:group::rwx,default:mask::rwx";
     };
   };
 }

@@ -53,6 +53,8 @@ Flakes only see git-tracked files: `git add` new files before building.
 
 **Neovim.** Built with nixCats in `dev/nvim/default.nix`: categories map to LSPs/tools/plugins, Lua config in `dev/nvim/config/lua/my/`. Adding a language means adding its tools under `lspsAndRuntimeDeps`, enabling the category in `packageDefinitions`, and adding `lua/my/lsp/<lang>.lua`.
 
+**Shared Steam library.** `/srv/steam` (owned by `jakeh`, group `steamlibrary` read-write via setgid + default ACL; set up in `nixos/users/jakeh.nix`, group membership per user).
+
 **Secrets.** sops-nix with `secrets/secrets.yaml`. User secrets are declared in `secrets/secrets.nix` (imported by `secrets/home-manager.nix`); machine secrets (wifi, cloudflared) in `secrets/default.nix` (NixOS).
 
 **Dependencies.** Renovate (`.github/renovate.json`) automerges flake input and lockfile updates.

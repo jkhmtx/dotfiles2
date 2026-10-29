@@ -3,7 +3,7 @@
     users.users.lucy = {
       isNormalUser = true;
       description = "Lucy";
-      extraGroups = ["networkmanager"];
+      extraGroups = ["networkmanager" "steamlibrary"];
     };
 
     systemd.tmpfiles.settings.accountsservice-lucy."/var/lib/AccountsService/users/lucy"."f+" = {

@@ -9,6 +9,11 @@
     };
   };
 
+  systemd.services."cloudflared-tunnel-2c37bd15-9bf3-4919-9e61-3595f9f69c5c" = {
+    unitConfig.StartLimitIntervalSec = 0;
+    serviceConfig.RestartSec = 5;
+  };
+
   # Required for ssh browser rendering
   services.openssh.settings.Macs = [
     # Current defaults:

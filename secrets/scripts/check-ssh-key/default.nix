@@ -8,7 +8,7 @@ pkgs.writeShellApplication {
       pkgs.sops
       pkgs.ssh-to-age
     ]
-    ++ pkgs.lib.optional pkgs.stdenv.isDarwin pkgs._1password-cli;
+    ++ pkgs.lib.optional pkgs.stdenv.hostPlatform.isDarwin pkgs._1password-cli;
 
   runtimeEnv = {
     SOPS_CONFIG = "${../../.sops.yaml}";

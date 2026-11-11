@@ -8,6 +8,7 @@
   {pr.list = ./pr/list;}
   {pr.print-approval-script = ./pr/print-approval-script;}
   {pr.sync = ./pr/sync;}
+  {ssh-nixos = ./ssh-nixos;}
   {tmux-session-find = ./tmux-session-find;}
   {tmux-window-move-session = ./tmux-window-move-session;}
   {tmux-window-new = ./tmux-window-new;}

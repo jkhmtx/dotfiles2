@@ -69,7 +69,10 @@
         user,
         ...
       }: let
-        specialArgs = mkSpecialArgs {inherit user unfree repoPath;};
+        specialArgs = mkSpecialArgs {
+          inherit user unfree repoPath;
+          secrets = import ./secrets/paths.nix {inherit (user) home;};
+        };
         inherit (specialArgs.mySpecialArgs) lib;
 
         homeManagerConfiguration = home-manager.lib.homeManagerConfiguration {

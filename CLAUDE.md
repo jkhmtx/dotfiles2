@@ -41,7 +41,7 @@ Flakes only see git-tracked files: `git add` new files before building.
 
 **Machine vs per-user.** NixOS modules get only machine-level `mySpecialArgs` (`rootPath`, `system`, `inputs`, `lib`, `unfree`) — no `user`/`repoPath` — so machine config can't depend on a user. A user's machine-side needs (account, SSH access, polkit ownership, default login session) live in `nixos/users/<name>.nix`, listed in the host's `nixOs.modules`. Desktop tooling and apps belong in Home Manager modules; `nixos/display` only offers sessions (Hyprland, Cinnamon) behind LightDM's slick greeter.
 
-**`mySpecialArgs` (Home Manager).** `rootPath`, `repoPath`, `system`, `inputs`, `lib` (this repo's `lib/`, not nixpkgs lib), `user`, `unfree`. Modules read user specifics from here rather than hardcoding.
+**`mySpecialArgs` (Home Manager).** `rootPath`, `repoPath`, `system`, `inputs`, `lib` (this repo's `lib/`, not nixpkgs lib), `user`, `unfree`, `secrets` (secret name → decrypted path, from `secrets/paths.nix`). Modules read user specifics from here rather than hardcoding.
 
 **Unfree packages.** Each feature that needs unfree packages has an `unfree.nix` returning a list of package names. `unfree.nix` at the root builds `allowUnfreePredicate` from `mySpecialArgs.unfree` — the user's `unfree` list for Home Manager, and `nixOs.unfree` for the NixOS system. New unfree packages must be listed in a feature `unfree.nix` *and* that file referenced in the relevant list.
 
@@ -55,6 +55,6 @@ Flakes only see git-tracked files: `git add` new files before building.
 
 **Shared Steam library.** `/srv/steam` (owned by `jakeh`, group `steamlibrary` read-write via setgid + default ACL; set up in `nixos/users/jakeh.nix`, group membership per user). `nixos/games` wraps Steam's bubblewrap sandbox so each user's `~/.local/share/Steam/steamapps/compatdata` is bound over the `compatdata` of shared libraries they don't own (`nixos/games/compatdata`): Proton prefixes and saves stay per user.
 
-**Secrets.** sops-nix with `secrets/secrets.yaml`. User secrets are declared in `secrets/secrets.nix` (imported by `secrets/home-manager.nix`); machine secrets (wifi, cloudflared) in `secrets/default.nix` (NixOS).
+**Secrets.** sops-nix with `secrets/secrets.yaml`. User secrets are listed in `secrets/paths.nix` (name → path, outside Home Manager so `shell/scripts` can use them via `mySpecialArgs.secrets`) and declared to sops-nix from that list in `secrets/secrets.nix` (imported by `secrets/home-manager.nix`); machine secrets (wifi, cloudflared) in `secrets/default.nix` (NixOS).
 
 **Dependencies.** Renovate (`.github/renovate.json`) automerges flake input and lockfile updates.

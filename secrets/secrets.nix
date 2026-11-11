@@ -1,20 +1,11 @@
-{
-  config,
-  mySpecialArgs,
-  ...
-}: let
+{mySpecialArgs, ...}: let
   inherit (mySpecialArgs.user) home;
 in {
   config = {
     sops = {
       age.sshKeyPaths = ["${home}/.ssh/id_ed25519"];
       defaultSopsFile = ./secrets.yaml;
-      secrets.githubToken = {};
-      secrets.master-gpg-secret-key = {};
-      secrets.master-gpg-public-key = {};
-      secrets.ssh-private-key = {
-        path = "${config.home.homeDirectory}/.ssh/id_ed25519-sops";
-      };
+      secrets = builtins.mapAttrs (_: path: {inherit path;}) mySpecialArgs.secrets;
     };
   };
 }

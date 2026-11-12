@@ -137,6 +137,6 @@
     nixosConfigurations = nixpkgs.lib.filterAttrs (_: config: config != null) (builtins.mapAttrs (_: config: config.nixosConfiguration) configs);
 
     scripts.x86_64-linux.default = configs.nixos.users.jakeh.scripts;
-    scripts.aarch64-darwin.default = configs.SB-US-B0E2-jhamilton.users.jake.scripts;
+    scripts.aarch64-darwin.default = configs."Jakes-MacBook-Pro.local".users.jake.scripts;
   };
 }

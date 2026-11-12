@@ -5,6 +5,8 @@ set -euo pipefail
 export HOME="${HOME}"
 export DOTFILES_DIR="${DOTFILES_DIR}"
 
+unset "${!OTEL_@}"
+
 case "${1:-}" in
 dotfiles | home)
   shift

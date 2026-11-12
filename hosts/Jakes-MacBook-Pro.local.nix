@@ -15,6 +15,7 @@ in {
       ../dev/direnv
       ../dev/git
       ../dev/github
+      ../dev/llm/claude
       ../dev/nvim
       ../dev/rust
       ../dev/ssh

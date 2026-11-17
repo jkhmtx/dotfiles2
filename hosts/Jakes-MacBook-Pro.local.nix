@@ -16,6 +16,7 @@ in {
       ../dev/git
       ../dev/github
       ../dev/llm/claude
+      ../dev/llm/sfk
       ../dev/nvim
       ../dev/rust
       ../dev/ssh

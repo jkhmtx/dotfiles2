@@ -23,6 +23,8 @@
     text = builtins.readFile ./main.sh;
   };
 in {
+  imports = [./update];
+
   config = {
     home.packages = [claude ccstatusline];
 
